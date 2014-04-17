@@ -105,6 +105,10 @@ log4j = {
       console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
   }
 
+  root {
+    info 'stdout'
+  }
+
   error 'org.codehaus.groovy.grails.web.servlet',        // controllers
       'org.codehaus.groovy.grails.web.pages',          // GSP
       'org.codehaus.groovy.grails.web.sitemesh',       // layouts
@@ -132,4 +136,5 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**/images/**':                  ['permitAll'],
 	'/**/favicon.ico':                ['permitAll']
 ]
+grails.plugin.springsecurity.logout.postOnly = false
 

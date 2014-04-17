@@ -10,7 +10,7 @@ class UserController {
   def authenticationManager
   def springSecurityService
 
-  @Secured(['IS_AUTHENTICATED_FULLY'])
+  @Secured('IS_AUTHENTICATED_FULLY')
   def profile(String username) {
     User loggedInUser = springSecurityService.getCurrentUser()
     // If the user is admin, allow them to see any user's profile.
@@ -24,7 +24,7 @@ class UserController {
     [userInstance: userInstance]
   }
 
-  @Secured(['IS_AUTHENTICATED_FULLY'])
+  @Secured('IS_AUTHENTICATED_FULLY')
   def edit() {
     User loggedInUser = springSecurityService.getCurrentUser()
     User userInstance = User.get(params?.userId)
