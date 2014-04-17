@@ -15,7 +15,7 @@ class BootStrap {
 
       if (!User.findByUsername('admin')) {
         log.info("| Creating admin user...")
-        def admin = new User(username: 'admin', password: 'admin', firstName: 'Admin', lastName: 'User').save(flush: true)
+        def admin = new User(username: 'admin', password: 'admin', firstName: 'Admin', lastName: 'User', email: 'admin@example.com').save(flush: true)
         admin.getAuthorities().add(role)
       }
     }

@@ -13,10 +13,13 @@ class UserController {
   @Secured(['IS_AUTHENTICATED_FULLY'])
   def profile(String username) {
     User loggedInUser = springSecurityService.getCurrentUser()
+    // If the user is admin, allow them to see any user's profile.
     if (loggedInUser.hasRole('ROLE_ADMIN')) {
       User userInstance = User.findByUsername(username) ?: loggedInUser
       return [userInstance: userInstance]
     }
+
+    // Otherwise, show the logged in user's profile.
     def userInstance = springSecurityService.getCurrentUser()
     [userInstance: userInstance]
   }
@@ -28,7 +31,8 @@ class UserController {
 
     boolean valid = true
     try {
-      authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userInstance.username, params?.currentPassword))
+      // Check if credentials are correct.
+      authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loggedInUser.username, params?.currentPassword))
     } catch (AuthenticationException e) {
       valid = false
     }
@@ -37,8 +41,10 @@ class UserController {
       if (userInstance) {
         if ((loggedInUser == userInstance) || loggedInUser.hasRole('ROLE_ADMIN')) {
           userInstance.firstName = params?.firstName
-          userInstance.lastName = params?.lastName
+          userInstance.lastName  = params?.lastName
+          userInstance.email     = params?.email
 
+          // If new password exists, and it matches the confirmation, update the user's password.
           if (params.newPassword && (params?.newPassword == params?.newPasswordConfirmation)) {
             userInstance.password = params.newPassword
           }
@@ -49,7 +55,11 @@ class UserController {
           return
         }
       }
+      // Unauthorized update was attempted.
+      redirect(action: 'profile')
+      return
     }
+    // An incorrect password was entered.
     flash.error = "The password you entered is incorrect."
     redirect(action: 'profile', params: [username: userInstance?.username])
   }

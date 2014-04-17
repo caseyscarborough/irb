@@ -25,6 +25,12 @@
       </div>
       <div class="row">
         <div class="small-12 columns">
+          <label for="email"><g:message code="user.email.label" /></label>
+          <input type="text" id="email" name="email" value="${userInstance?.email}" placeholder="${message(code: 'user.email.label')}" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="small-12 columns">
           <label for="currentPassword"><g:message code="user.current.password.label" /></label>
           <input type="password" id="currentPassword" name="currentPassword" value="" placeholder="${message(code: 'user.current.password.label')}" required />
           <small class="error">You must enter your password to update your profile.</small>
