@@ -9,22 +9,24 @@
   <div class="medium-8 medium-offset-2 small-12 columns">
     <g:render template="../shared/alerts" />
     <p><g:message code="login.header"/></p>
-    <form action="${postUrl}" method="POST">
+    <form action="${postUrl}" method="POST" data-abide>
       <div class="row">
         <div class="small-12 columns">
           <label for="username"><g:message code="login.username.label"/></label>
-          <input name="j_username" type="text" placeholder="${message(code: 'login.username.label')}">
+          <input name="j_username" type="text" placeholder="${message(code: 'login.username.label')}" required>
+          <small class="error">Username is required.</small>
         </div>
       </div>
       <div class="row">
         <div class="small-12 columns">
           <label for="password"><g:message code="login.password.label"/></label>
-          <input name="j_password" type="password" placeholder="${message(code: 'login.password.label')}">
+          <input name="j_password" type="password" placeholder="${message(code: 'login.password.label')}" required>
+          <small class="error">Password is required.</small>
         </div>
       </div>
       <div class="row">
         <div class="small-12 columns">
-          <input type='checkbox' name='j_remember_me' id='remember-me' <g:if test='${hasCookie}'>checked='checked'</g:if>>
+          <input type='checkbox' name='_spring_security_remember_me' id='remember-me' <g:if test='${hasCookie}'>checked='checked'</g:if>>
             <label for='remember-me'><g:message code="login.remember.me.label"/></label>
           </input>
         </div>
