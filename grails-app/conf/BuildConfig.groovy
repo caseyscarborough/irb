@@ -68,6 +68,5 @@ grails.project.dependency.resolution = {
     runtime ":jquery:1.11.0.2"
     runtime ":resources:1.2.7"
     runtime ":database-migration:1.3.8"
-    runtime ":foundation:5.2.2"
   }
 }
