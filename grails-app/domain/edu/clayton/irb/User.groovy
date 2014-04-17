@@ -31,6 +31,10 @@ class User {
 		UserRole.findAllByUser(this).collect { it.role } as Set
 	}
 
+  boolean hasRole(String role) {
+    return getAuthorities().contains(Role.findByAuthority(role))
+  }
+
 	def beforeInsert() {
 		encodePassword()
 	}
@@ -44,4 +48,8 @@ class User {
 	protected void encodePassword() {
 		password = springSecurityService.encodePassword(password)
 	}
+
+  public String toString() {
+    "$firstName $lastName"
+  }
 }

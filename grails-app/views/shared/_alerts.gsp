@@ -6,7 +6,7 @@
 </g:if>
 <g:if test='${flash.error}'>
   <div data-alert class='alert-box alert'>
-    ${flash.message}
+    ${flash.error}
     <a href="#" class="close">&times;</a>
   </div>
 </g:if>

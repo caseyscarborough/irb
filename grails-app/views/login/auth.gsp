@@ -7,20 +7,21 @@
 <body>
 <div class="row">
   <div class="medium-8 medium-offset-2 small-12 columns">
+    <h1>Login</h1>
     <g:render template="../shared/alerts" />
     <p><g:message code="login.header"/></p>
     <form action="${postUrl}" method="POST" data-abide>
       <div class="row">
         <div class="small-12 columns">
-          <label for="username"><g:message code="login.username.label"/></label>
-          <input name="j_username" type="text" placeholder="${message(code: 'login.username.label')}" required>
+          <label for="username"><g:message code="user.username.label"/></label>
+          <input name="j_username" type="text" placeholder="${message(code: 'user.username.label')}" required>
           <small class="error">Username is required.</small>
         </div>
       </div>
       <div class="row">
         <div class="small-12 columns">
-          <label for="password"><g:message code="login.password.label"/></label>
-          <input name="j_password" type="password" placeholder="${message(code: 'login.password.label')}" required>
+          <label for="password"><g:message code="user.password.label"/></label>
+          <input name="j_password" type="password" placeholder="${message(code: 'user.password.label')}" required>
           <small class="error">Password is required.</small>
         </div>
       </div>
