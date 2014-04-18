@@ -1,7 +1,7 @@
 package edu.clayton.irb
 
 class IrbTagLib {
-  static defaultEncodeAs = 'html'
+  static defaultEncodeAs = 'raw'
   //static encodeAsForTags = [tagName: 'raw']
   static namespace = "irb"
 
@@ -15,6 +15,12 @@ class IrbTagLib {
       } else {
         "Welcome!"
       }
+    }
+  }
+
+  def isNotUser = { attrs, body ->
+    if (springSecurityService.currentUser?.username != attrs.username) {
+      out << body()
     }
   }
 }

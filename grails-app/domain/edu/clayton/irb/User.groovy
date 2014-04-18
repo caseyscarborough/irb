@@ -32,6 +32,10 @@ class User {
 		UserRole.findAllByUser(this).collect { it.role } as Set
 	}
 
+  Role getRole() {
+    getAuthorities().getAt(0)
+  }
+
   boolean hasRole(String role) {
     return getAuthorities().contains(Role.findByAuthority(role))
   }

@@ -15,6 +15,6 @@ class Role {
 	}
 
   String toString() {
-    authority
+    description ?: authority
   }
 }

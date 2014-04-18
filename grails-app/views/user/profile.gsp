@@ -24,7 +24,8 @@
       <div class="row">
         <div class="small-12 columns">
           <label for="email"><g:message code="user.email.label" /></label>
-          <input type="text" id="email" name="email" value="${userInstance?.email}" placeholder="${message(code: 'user.email.label')}" />
+          <input type="text" id="email" name="email" value="${userInstance?.email}" placeholder="${message(code: 'user.email.label')}" required pattern=".*@.*\..*" />
+          <small class="error">You must have a valid email address.</small>
         </div>
       </div>
       <div class="row">
@@ -46,7 +47,22 @@
           <input type="password" id="newPasswordConfirmation" name="newPasswordConfirmation" value="" placeholder="${message(code: 'user.new.password.confirmation.label')}" />
         </div>
       </div>
-      <g:submitButton id="submit" name="submit" class="button radius" value="${message(code: 'user.profile.submit.button')}" />
+      <sec:ifAllGranted roles="ROLE_ADMIN">
+      <irb:isNotUser username="${userInstance?.username}">
+        <div class="row">
+          <div class="small-12 columns">
+            <label for="role">Select Box
+              <select id="role" name="role">
+                <g:each in="${roleInstanceList}" var="roleInstance">
+                  <option value="${roleInstance?.id}"<g:if test="${userInstance?.role?.id == roleInstance?.id}"> selected</g:if>>${roleInstance}</option>
+                </g:each>
+              </select>
+            </label>
+          </div>
+        </div>
+      </irb:isNotUser>
+      </sec:ifAllGranted>
+    <g:submitButton id="submit" name="submit" class="button radius" value="${message(code: 'user.profile.submit.button')}" />
     </form>
   </div>
 </div>
