@@ -48,7 +48,7 @@
           <input type="password" id="newPasswordConfirmation" name="newPasswordConfirmation" value="" placeholder="${message(code: 'user.new.password.confirmation.label')}" />
         </div>
       </div>
-      <g:submitButton name="submit" class="button radius" value="${message(code: 'user.profile.submit.button')}" />
+      <g:submitButton id="submit" name="submit" class="button radius" value="${message(code: 'user.profile.submit.button')}" />
     </form>
   </div>
 </div>

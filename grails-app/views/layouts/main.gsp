@@ -16,6 +16,15 @@
     <g:javascript library="jquery" />
     <r:layoutResources />
     <script src="${resource(dir: 'js', file: 'foundation.min.js')}" type="text/javascript"></script>
+    <script>
+      $(function() {
+        var message = ${flash?.message?.size() > 0};
+        var error = ${flash?.error?.size() > 0};
+
+        if (message) { $("#flash-message").show(); }
+        if (error)   { $("#flash-error").show(); }
+      });
+    </script>
 </head>
 	<body>
     <g:render template="../shared/navBar" />

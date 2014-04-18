@@ -62,5 +62,6 @@ class UserController {
     // An incorrect password was entered.
     flash.error = "The password you entered is incorrect."
     redirect(action: 'profile', params: [username: userInstance?.username])
+    return
   }
 }

@@ -1,12 +1,8 @@
-<g:if test='${flash.message}'>
-  <div data-alert class='alert-box'>
-    ${flash.message}
-    <a href="#" class="close">&times;</a>
-  </div>
-</g:if>
-<g:if test='${flash.error}'>
-  <div data-alert class='alert-box alert'>
-    ${flash.error}
-    <a href="#" class="close">&times;</a>
-  </div>
-</g:if>
+<div data-alert class='alert-box' id="flash-message">
+  <span class="message">${flash.message}</span>
+  <a href="#" class="close">&times;</a>
+</div>
+<div data-alert class='alert-box alert' id="flash-error">
+  <span class="message">${flash.error}</span>
+  <a href="#" class="close">&times;</a>
+</div>
