@@ -3,6 +3,7 @@ package edu.clayton.irb
 class Role {
 
 	String authority
+  String description
 
 	static mapping = {
 		cache true
@@ -10,6 +11,7 @@ class Role {
 
 	static constraints = {
 		authority blank: false, unique: true
+    description nullable: true
 	}
 
   String toString() {
