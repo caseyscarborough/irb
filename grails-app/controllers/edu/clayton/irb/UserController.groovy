@@ -64,4 +64,61 @@ class UserController {
     redirect(action: 'profile', params: [username: userInstance?.username])
     return
   }
+
+  @Secured('ROLE_ADMIN')
+  def manage() {
+    [userInstanceList: User.all]
+  }
+
+  @Secured('ROLE_ADMIN')
+  def enable(Long id) {
+    User userInstance = User.get(id)
+
+    if (userInstance) {
+      userInstance.enabled = true
+      userInstance.save(flush: true)
+
+      flash.message = "Successfully enabled account for ${userInstance.username}."
+    } else {
+      flash.error = "Could not find user with ID: ${id}."
+    }
+
+    redirect(action: 'manage')
+  }
+
+  @Secured('ROLE_ADMIN')
+  def disable(Long id) {
+    User userInstance = User.get(id)
+
+    if (userInstance) {
+      userInstance.enabled = false
+      userInstance.save(flush: true)
+
+      flash.message = "Successfully disabled account for ${userInstance.username}."
+    } else {
+      flash.error = "Could not find user with ID: ${id}."
+    }
+
+    redirect(action: 'manage')
+  }
+
+  @Secured('ROLE_ADMIN')
+  def delete(Long id) {
+    User userInstance = User.get(id)
+
+    if (userInstance) {
+      UserRole.findAllByUser(userInstance).each { r ->
+        r.delete()
+      }
+
+      userInstance.delete(flush: true)
+
+      flash.message = "Successfully deleted account for ${userInstance.username}."
+    } else {
+      flash.error = "Could not find user with ID: ${id}."
+    }
+
+    redirect(action: 'manage')
+  }
+
 }

@@ -6,19 +6,17 @@
 
 <body>
 <div class="row">
-  <div class="medium-8 medium-offset-2 small-12 columns">
+  <div class="medium-10 medium-offset-1 small-12 columns">
     <h1>Update Profile</h1>
     <g:render template="../shared/alerts" />
     <form action="${createLink(controller: 'user', action: 'edit')}" method="POST" name="edit-user-form" id="edit-user-form" data-abide>
       <g:hiddenField name="userId" value="${userInstance?.id}" />
       <div class="row">
-        <div class="small-12 columns">
+        <div class="small-12 medium-6 columns">
           <label for="firstName"><g:message code="user.first.name.label" /></label>
           <input type="text" id="firstName" name="firstName" value="${userInstance?.firstName}" placeholder="${message(code: 'user.first.name.label')}" />
         </div>
-      </div>
-      <div class="row">
-        <div class="small-12 columns">
+        <div class="small-12 medium-6 columns">
           <label for="lastName"><g:message code="user.last.name.label" /></label>
           <input type="text" id="lastName" name="lastName" value="${userInstance?.lastName}" placeholder="${message(code: 'user.last.name.label')}" />
         </div>

@@ -11,5 +11,6 @@ class UrlMappings {
     "/login"(controller: "login", action: "auth")
     "/"(controller: "home", action: "index")
     "500"(view: '/error')
+    "404"(view: '/404')
   }
 }
