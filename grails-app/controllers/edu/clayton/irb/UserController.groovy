@@ -94,7 +94,16 @@ class UserController {
   @Secured('ROLE_ADMIN')
   @Transactional
   def save() {
-    def userInstance = new User()
+    def userInstance = User.findByUsername(params?.username)
+
+    // The username already exists
+    if (userInstance) {
+      flash.error = "That username already exists. Please try another."
+      render(view: 'create', model: [userInstance: userInstance, roleInstanceList: Role.all])
+      return
+    }
+
+    userInstance = new User()
     userInstance.properties = params
 
     // If the save was successful
