@@ -11,4 +11,6 @@ databaseChangeLog = {
 	include file: '201404191002-add-application-class.groovy'
 
 	include file: '201404191007-add-application-file-class.groovy'
+
+	include file: '201404191020-add-status-class.groovy'
 }

@@ -6,6 +6,7 @@ class Application {
   User reviewedBy
   Date dateCreated
   Date lastUpdated
+  Status status
   String comments
 
   static belongsTo = [User]
