@@ -1,0 +1,42 @@
+<html>
+<head>
+  <meta name='layout' content='main'/>
+  <title>Create Status</title>
+</head>
+
+<body>
+<div class="row">
+  <div class="medium-10 medium-offset-1 small-12 columns">
+    <h1>Create Status</h1>
+    <g:render template="../shared/alerts" />
+    <form action="${createLink(controller: 'status', action: 'save')}" method="POST" name="create-status-form" id="create-status-form" data-abide>
+      <div class="row">
+        <div class="small-12 columns">
+          <label for="name"><g:message code="status.name.label" /></label>
+          <input type="text" id="name" name="name" value="${statusInstance?.name}" placeholder="${message(code: 'status.name.label')}" required />
+          <small id="username-error" class="error">A status must have a name.</small>
+        </div>
+      </div>
+      <div class="row">
+        <div class="small-12 columns">
+          <label for="description"><g:message code="status.description.label" /></label>
+          <textarea id="description" name="description" class="textarea-tall" value="${statusInstance?.description}" placeholder="${message(code: 'status.description.label')}" ></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="small-12 columns">
+          <label for="type"><g:message code="status.type.label" />
+            <select id="type" name="type">
+              <g:each in="${statusTypeList}" var="statusType">
+                <option value="${statusType?.id}">${statusType}</option>
+              </g:each>
+            </select>
+          </label>
+        </div>
+      </div>
+      <g:submitButton id="submit" name="submit" class="button small radius" value="${message(code: 'status.create.submit.button')}" />
+    </form>
+  </div>
+</div>
+</body>
+</html>

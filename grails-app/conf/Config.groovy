@@ -102,13 +102,15 @@ environments {
 // log4j configuration
 log4j = {
   appenders {
-      console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
+      console name: 'stdout', layout: pattern(conversionPattern: '%c{2} %m%n')
   }
 
   root {
+    debug 'stdout'
     info 'stdout'
   }
 
+  debug 'grails.app'
   error 'org.codehaus.groovy.grails.web.servlet',        // controllers
         'org.codehaus.groovy.grails.web.pages',          // GSP
         'org.codehaus.groovy.grails.web.sitemesh',       // layouts

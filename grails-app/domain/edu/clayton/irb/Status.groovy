@@ -10,6 +10,9 @@ class Status {
     description nullable: true
   }
 
+  static mapping = {
+  }
+
   String toString() {
     name
   }

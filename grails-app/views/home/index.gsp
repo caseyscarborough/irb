@@ -5,9 +5,9 @@
 		<title>Home</title>
 	</head>
 	<body>
-    <g:render template="../shared/alerts" />
     <div id="homepage">
       <div class="row">
+        <g:render template="../shared/alerts" />
         <div class="small-12 medium-5 columns">
           <g:img dir="images" file="loch.png" class="logo" />
         </div>

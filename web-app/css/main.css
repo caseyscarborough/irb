@@ -25,3 +25,7 @@
 .vcard .smaller {
     font-size: 13px;
 }
+
+.textarea-tall {
+    min-height: 150px;
+}
