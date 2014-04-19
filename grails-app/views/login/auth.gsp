@@ -32,7 +32,7 @@
           </input>
         </div>
       </div>
-      <g:submitButton name="${message(code: 'login.submit')}" class="button"/>
+      <g:submitButton name="${message(code: 'login.submit')}" class="button small radius"/>
     </form>
   </div>
 </div>

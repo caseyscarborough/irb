@@ -13,3 +13,15 @@
 #flash-message, #flash-error {
     display: none;
 }
+
+.vcard.users {
+    min-width: 300px;
+}
+
+.users.disabled {
+    background: #ffdfe3;
+}
+
+.vcard .smaller {
+    font-size: 13px;
+}

@@ -62,7 +62,7 @@
         </div>
       </irb:isNotUser>
       </sec:ifAllGranted>
-    <g:submitButton id="submit" name="submit" class="button radius" value="${message(code: 'user.profile.submit.button')}" />
+    <g:submitButton id="submit" name="submit" class="button small radius" value="${message(code: 'user.profile.submit.button')}" />
     </form>
   </div>
 </div>

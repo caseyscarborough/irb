@@ -52,7 +52,7 @@
           </label>
         </div>
       </div>
-      <g:submitButton id="submit" name="submit" class="button radius" value="${message(code: 'user.create.submit.button')}" />
+      <g:submitButton id="submit" name="submit" class="button small radius" value="${message(code: 'user.create.submit.button')}" />
     </form>
   </div>
 </div>
