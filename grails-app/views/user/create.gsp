@@ -1,7 +1,7 @@
 <html>
 <head>
   <meta name='layout' content='main'/>
-  <title>Profile</title>
+  <title>Create User</title>
 </head>
 
 <body>
@@ -9,7 +9,7 @@
   <div class="medium-10 medium-offset-1 small-12 columns">
     <h1>Create User</h1>
     <g:render template="../shared/alerts" />
-    <form action="${createLink(controller: 'user', action: 'save')}" method="POST" name="edit-user-form" id="edit-user-form" data-abide>
+    <form action="${createLink(controller: 'user', action: 'save')}" method="POST" name="create-user-form" id="create-user-form" data-abide>
       <div class="row">
         <div class="small-12 columns">
           <label for="username"><g:message code="user.username.label" /> (must be unique)</label>
@@ -43,7 +43,7 @@
       </div>
       <div class="row">
         <div class="small-12 columns">
-          <label for="role">Select Box
+          <label for="role"><g:message code="user.role.label" />
             <select id="role" name="role">
               <g:each in="${roleInstanceList}" var="roleInstance">
                 <option value="${roleInstance?.id}">${roleInstance}</option>

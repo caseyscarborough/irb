@@ -51,7 +51,7 @@
       <irb:isNotUser username="${userInstance?.username}">
         <div class="row">
           <div class="small-12 columns">
-            <label for="role">Select Box
+            <label for="role"><g:message code="user.role.label" />
               <select id="role" name="role">
                 <g:each in="${roleInstanceList}" var="roleInstance">
                   <option value="${roleInstance?.id}"<g:if test="${userInstance?.role?.id == roleInstance?.id}"> selected</g:if>>${roleInstance}</option>
