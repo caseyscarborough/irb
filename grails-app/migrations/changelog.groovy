@@ -9,4 +9,6 @@ databaseChangeLog = {
 	include file: '201404181547-add-description-to-role.groovy'
 
 	include file: '201404191002-add-application-class.groovy'
+
+	include file: '201404191007-add-application-file-class.groovy'
 }
