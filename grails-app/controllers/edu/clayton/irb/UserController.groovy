@@ -77,7 +77,7 @@ class UserController {
 
   @Secured('ROLE_ADMIN')
   def manage() {
-    [userInstanceList: User.all]
+    [userInstanceList: User.list(sort: 'username'), currentUser: springSecurityService?.currentUser]
   }
 
   @Secured('ROLE_ADMIN')
@@ -134,11 +134,15 @@ class UserController {
     User userInstance = User.get(id)
 
     if (userInstance) {
-      // Disable the user.
-      userInstance.enabled = false
-      userInstance.save(flush: true)
+      if (userInstance != springSecurityService.currentUser) {
+        // Disable the user.
+        userInstance.enabled = false
+        userInstance.save(flush: true)
 
-      flash.message = "Successfully disabled account for ${userInstance.username}."
+        flash.message = "Successfully disabled account for ${userInstance.username}."
+      } else {
+        flash.error = "You cannot disable your own account."
+      }
     } else {
       flash.error = "Could not find user with ID: ${id}."
     }
