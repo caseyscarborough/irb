@@ -9,7 +9,8 @@
   <div class="medium-10 medium-offset-1 small-12 columns">
     <h1>Administration</h1>
     <g:render template="../shared/alerts" />
-    <g:link controller="user" action="manage">Manage Users</g:link>
+    <g:link controller="user" action="manage">User Management</g:link><br>
+    <g:link controller="status" action="manage">Status Management</g:link>
   </div>
 </div>
 </body>

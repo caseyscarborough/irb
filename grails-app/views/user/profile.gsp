@@ -63,6 +63,9 @@
       </irb:isNotUser>
       </sec:ifAllGranted>
     <g:submitButton id="submit" name="submit" class="button small radius" value="${message(code: 'user.profile.submit.button')}" />
+    <sec:ifAllGranted roles="ROLE_ADMIN">
+      <br><br><g:link action="manage">Return to User Management</g:link>
+    </sec:ifAllGranted>
     </form>
   </div>
 </div>

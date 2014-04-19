@@ -53,7 +53,8 @@
         </div>
       </div>
       <g:submitButton id="submit" name="submit" class="button small radius" value="${message(code: 'user.create.submit.button')}" />
-    </form>
+      <br><br><g:link action="manage">Return to User Management</g:link>
+  </form>
   </div>
 </div>
 </body>

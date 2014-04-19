@@ -46,12 +46,14 @@ class UserController {
           userInstance.lastName  = params?.lastName
           userInstance.email     = params?.email
 
-          def role = Role.get(params?.role)
+          if (loggedInUser.hasRole('ROLE_ADMIN')) {
+            def role = Role.get(params?.role)
 
-          // If role changed, remove previous roles and create new one.
-          if (!userInstance.hasRole(role.authority)) {
-            UserRole.findAllByUser(userInstance).each { r -> r.delete(flush: true) }
-            UserRole.create(userInstance, role, true)
+            // If role changed, remove previous roles and create new one.
+            if (!userInstance.hasRole(role.authority)) {
+              UserRole.findAllByUser(userInstance).each { r -> r.delete(flush: true) }
+              UserRole.create(userInstance, role, true)
+            }
           }
 
           // If new password exists, and it matches the confirmation, update the user's password.

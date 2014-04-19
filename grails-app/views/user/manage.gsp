@@ -1,13 +1,13 @@
 <html>
 <head>
   <meta name='layout' content='main'/>
-  <title>Manage Users</title>
+  <title>User Management</title>
 </head>
 
 <body>
 <div class="row">
   <div class="medium-10 medium-offset-1 small-12 columns">
-    <h1>Manage Users</h1>
+    <h1>User Management</h1>
     <g:render template="../shared/alerts" />
     <br><h3>User List</h3>
     <table width="100%" class="show-for-medium-up">

@@ -18,6 +18,10 @@
     min-width: 300px;
 }
 
+.vcard.status {
+    width: 100%;
+}
+
 .users.disabled {
     background: #ffdfe3;
 }
@@ -28,4 +32,8 @@
 
 .textarea-tall {
     min-height: 150px;
+}
+
+.no-margin {
+    margin: 0;
 }
