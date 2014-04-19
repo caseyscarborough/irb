@@ -13,4 +13,6 @@ databaseChangeLog = {
 	include file: '201404191007-add-application-file-class.groovy'
 
 	include file: '201404191020-add-status-class.groovy'
+
+	include file: '201404191104-add-missing-status-id-column.groovy'
 }
