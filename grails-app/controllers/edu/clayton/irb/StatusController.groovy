@@ -26,13 +26,13 @@ class StatusController {
     statusInstance.type = StatusType.findById(Integer.parseInt(params?.type))
 
     if (statusInstance.save(flush: true)) {
-      flash.message = "Successfully created new status type."
+      flash.message = message(code: 'status.create.success')
       redirect(action: 'manage')
       return
     }
 
-    flash.error = "An error occurred creating the status type."
-    log.info("An error occurred creating the status type:\n${statusInstance.errors}")
+    flash.error = message(code: 'status.create.error')
+    log.info(message(code: 'status.create.error') + ":\n${statusInstance.errors}")
     render(view: 'create', model: [statusInstance: statusInstance, statusTypeList: StatusType.findAll()])
   }
 
@@ -56,13 +56,13 @@ class StatusController {
     statusInstance.type = StatusType.findById(Integer.parseInt(params?.type))
 
     if (statusInstance.save(flush: true)) {
-      flash.message = "Successfully updated status type."
+      flash.message = message(code: 'status.update.success')
       redirect(action: 'edit', params: [id: statusInstance.id])
       return
     }
 
-    flash.error = "An error occurred updating the status type."
-    log.info("An error occurred updating the status type:\n${statusInstance.errors}")
+    flash.error = message(code: 'status.update.error')
+    log.info(message(code: 'status.update.error') + ":\n${statusInstance.errors}")
     render(view: 'edit', model: [statusInstance: statusInstance, statusTypeList: StatusType.findAll()])
   }
 
@@ -75,10 +75,10 @@ class StatusController {
 
     try {
       statusInstance.delete(flush: true)
-      flash.message = "Successfully deleted the status."
+      flash.message = message(code: 'status.delete.success')
     } catch (DataIntegrityViolationException e) {
-      flash.error = "An error occurred deleting the status."
-      log.error("An error occurred while deleting a status", e)
+      flash.error = message(code: 'status.delete.error')
+      log.error(message(code: 'status.delete.error'), e)
     }
     redirect(action: 'manage')
   }

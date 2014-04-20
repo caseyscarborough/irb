@@ -62,7 +62,7 @@ class UserController {
           }
 
           userInstance.save(flush: true)
-          flash.message = "Successfully updated user information."
+          flash.message = message(code: 'user.update.success')
           redirect(action: 'profile', params: [username: userInstance?.username])
           return
         }
@@ -72,7 +72,7 @@ class UserController {
       return
     }
     // An incorrect password was entered.
-    flash.error = "The password you entered is incorrect."
+    flash.error = message(code: 'user.update.password.error')
     redirect(action: 'profile', params: [username: userInstance?.username])
     return
   }
@@ -100,7 +100,7 @@ class UserController {
 
     // The username already exists
     if (userInstance) {
-      flash.error = "That username already exists. Please try another."
+      flash.error = message(code: 'user.save.username.error')
       render(view: 'create', model: [userInstance: userInstance, roleInstanceList: Role.all])
       return
     }
@@ -112,12 +112,12 @@ class UserController {
     if (userInstance.save(flush: true)) {
       // Create the role for the user and redirect to the manage users page.
       UserRole.create(userInstance, Role.get(params?.role), true)
-      flash.message = "Successfully created user."
+      flash.message = message(code: 'user.create.success')
       redirect(action: 'manage')
       return
     }
 
-    flash.error = "There was a problem creating the user. Please try again."
+    flash.error = message(code: 'user.create.error')
     render(view: 'create', model: [userInstance: userInstance, roleInstanceList: Role.all])
   }
 
@@ -131,9 +131,9 @@ class UserController {
       userInstance.enabled = true
       userInstance.save(flush: true)
 
-      flash.message = "Successfully enabled account for ${userInstance.username}."
+      flash.message = message(code: 'user.enable.success', args: [userInstance?.username])
     } else {
-      flash.error = "Could not find user with ID: ${id}."
+      flash.error = message(code: 'user.enable.error', args: [id])
     }
 
     redirect(action: 'manage')
@@ -150,12 +150,12 @@ class UserController {
         userInstance.enabled = false
         userInstance.save(flush: true)
 
-        flash.message = "Successfully disabled account for ${userInstance.username}."
+        flash.message = message(code: 'user.disable.success', args: [userInstance?.username])
       } else {
-        flash.error = "You cannot disable your own account."
+        flash.error = message(code: 'user.disable.self.error')
       }
     } else {
-      flash.error = "Could not find user with ID: ${id}."
+      flash.error = message(code: 'user.disable.error', args: [id])
     }
 
     redirect(action: 'manage')
@@ -171,9 +171,9 @@ class UserController {
       UserRole.findAllByUser(userInstance).each { r -> r.delete() }
       userInstance.delete(flush: true)
 
-      flash.message = "Successfully deleted account for ${userInstance.username}."
+      flash.message = message(code: 'user.delete.success', args: [userInstance?.username])
     } else {
-      flash.error = "Could not find user with ID: ${id}."
+      flash.error = message(code: 'user.delete.error', args: [id])
     }
 
     redirect(action: 'manage')
