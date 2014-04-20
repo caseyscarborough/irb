@@ -141,3 +141,6 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 ]
 grails.plugin.springsecurity.logout.postOnly = false
 
+irb {
+  supportedFiletypes = [ 'PDF', 'JPG', 'PNG', 'GIF', 'DOCX', 'DOC', 'XLS', 'XLSX', 'JPEG' ]
+}

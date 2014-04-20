@@ -22,7 +22,7 @@
     </g:else>
 
     <br><h3>Options</h3>
-    <g:link action="create"><button class="button small radius"><g:message code="application.submit.button" /></button></g:link>
+    <g:link action="submit"><button class="button small radius"><g:message code="application.submit.button" /></button></g:link>
   </div>
 </div>
 </body>
