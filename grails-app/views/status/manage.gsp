@@ -24,7 +24,7 @@
     </g:if>
     <g:else>
       <div class="alert-box">
-        There are currently no statuses in the system.
+        <g:message code="status.no.records" />
       </div>
     </g:else>
 

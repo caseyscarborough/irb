@@ -10,6 +10,7 @@
     <!-- Left Nav Section -->
     <ul class="left">
       <li<g:if test="${params.controller == 'home'}"> class="active"</g:if>><g:link controller="home">Home</g:link></li>
+      <li<g:if test="${params.controller == 'application'}"> class="active"</g:if>><g:link controller="application">Applications</g:link></li>
     </ul>
 
     <!-- Right Nav Section -->
