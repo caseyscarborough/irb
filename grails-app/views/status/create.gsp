@@ -35,7 +35,7 @@
         </div>
       </div>
       <g:submitButton id="submit" name="submit" class="button small radius" value="${message(code: 'status.create.submit.button')}" /><br><br>
-      <g:link action="manage">Return to Status Management</g:link>
+      <g:link action="manage">Return to <g:message code="status.management.label" /></g:link>
   </form>
   </div>
 </div>

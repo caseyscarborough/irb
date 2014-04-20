@@ -9,9 +9,6 @@ class StatusController {
 
   @Secured('ROLE_ADMIN')
   def manage() {
-    Status.list(sort: 'name').each { s ->
-      println s
-    }
     [statusInstanceList: Status.list(sort: 'name')]
   }
 

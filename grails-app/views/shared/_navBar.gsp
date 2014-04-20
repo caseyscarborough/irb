@@ -15,10 +15,16 @@
     <!-- Right Nav Section -->
     <ul class="right">
       <sec:ifAllGranted roles="ROLE_ADMIN">
-        <li<g:if test="${params.controller == 'admin'}"> class="active"</g:if>><g:link controller="admin">Admin</g:link></li>
+        <li class="has-dropdown<g:if test="${params.controller == 'admin'}"> active</g:if>">
+          <g:link controller="admin">Site Administration</g:link>
+          <ul class="dropdown">
+            <li><g:link controller="user" action="manage"><g:message code="user.management.label" /></g:link></li>
+            <li><g:link controller="status" action="manage"><g:message code="status.management.label" /></g:link></li>
+          </ul>
+        </li>
       </sec:ifAllGranted>
       <sec:ifLoggedIn>
-        <li class="has-dropdown">
+        <li class="has-dropdown<g:if test="${params.controller == 'user'}"> active</g:if>">
           <a href="#"><irb:welcomeMessage/></a>
           <ul class="dropdown">
             <li><g:link controller="user" action="profile">Update Profile</g:link></li>
@@ -27,7 +33,7 @@
         <li><g:link controller="logout">Logout</g:link></li>
       </sec:ifLoggedIn>
       <sec:ifNotLoggedIn>
-        <li><g:link controller="login" action="index">Login</g:link></li>
+        <li <g:if test="${params.controller == 'login'}"> class="active"</g:if>><g:link controller="login" action="index">Login</g:link></li>
       </sec:ifNotLoggedIn>
     </ul>
   </section>

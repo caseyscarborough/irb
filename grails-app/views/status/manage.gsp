@@ -1,13 +1,13 @@
 <html>
 <head>
   <meta name='layout' content='main'/>
-  <title>Status Management</title>
+  <title><g:message code="status.management.label" /></title>
 </head>
 
 <body>
 <div class="row">
   <div class="medium-10 medium-offset-1 small-12 columns">
-    <h1>Status Management</h1>
+    <h1><g:message code="status.management.label" /></h1>
     <g:render template="../shared/alerts" />
     <br><h3>Status List</h3>
     <g:if test="${statusInstanceList.size() > 0}">
