@@ -1,8 +1,6 @@
 databaseChangeLog = {
 
-
 	include file: '201404171252-add-spring-security-classes.groovy'
-
 
 	include file: '201404171819-add-email-to-user.groovy'
 
@@ -15,4 +13,7 @@ databaseChangeLog = {
 	include file: '201404191020-add-status-class.groovy'
 
 	include file: '201404191104-add-missing-status-id-column.groovy'
+
+	include file: '201404201840-add-title-and-description-to-application.groovy'
+
 }

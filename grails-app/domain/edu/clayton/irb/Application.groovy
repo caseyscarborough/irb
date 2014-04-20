@@ -7,6 +7,8 @@ class Application {
   Date dateCreated
   Date lastUpdated
   Status status
+  String title
+  String description
   String comments
 
   static belongsTo = [User]
@@ -14,8 +16,9 @@ class Application {
   static hasMany = [files: ApplicationFile]
 
   static constraints = {
-    reviewedBy nullable: true
     comments nullable: true
+    description nullable: true
+    reviewedBy nullable: true
   }
 
   def beforeValidate() {
