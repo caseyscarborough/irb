@@ -1,8 +1,8 @@
-<div data-alert class='alert-box' id="flash-message">
+<div data-alert class='alert alert-info alert-dismissable' id="flash-message">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
   <span class="message">${flash.message}</span>
-  <a href="#" class="close">&times;</a>
 </div>
-<div data-alert class='alert-box alert' id="flash-error">
+<div data-alert class='alert alert-danger alert-dismissable' id="flash-error">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
   <span class="message">${flash.error}</span>
-  <a href="#" class="close">&times;</a>
 </div>

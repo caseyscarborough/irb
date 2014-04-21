@@ -5,24 +5,27 @@
 </head>
 
 <body>
-<div class="row">
-  <div class="medium-10 medium-offset-1 small-12 columns">
-    <h1><g:message code="application.label" /></h1>
-    <g:render template="../shared/alerts" />
-    <br><h3>Application List</h3>
-    <g:if test="${applicationInstanceList.size() > 0}">
-      <g:each in="${applicationInstanceList}" var="applicationInstance">
+<div class="container">
+  <div class="row">
+    <div class="col-md-1 hidden-sm"></div>
+    <div class="col-10 col-sm-12 columns">
+      <h1><g:message code="application.label" /></h1>
+      <g:render template="../shared/alerts" />
+      <br><h3>Application List</h3>
+      <g:if test="${applicationInstanceList.size() > 0}">
+        <g:each in="${applicationInstanceList}" var="applicationInstance">
 
-      </g:each>
-    </g:if>
-    <g:else>
-      <div class="alert-box">
-        <g:message code="application.no.records" />
-      </div>
-    </g:else>
+        </g:each>
+      </g:if>
+      <g:else>
+        <div class="alert alert-info">
+          <g:message code="application.no.records" />
+        </div>
+      </g:else>
 
-    <br><h3>Options</h3>
-    <g:link action="submit"><button class="button small radius"><g:message code="application.submit.button" /></button></g:link>
+      <br><h3>Options</h3>
+      <g:link action="submit"><button class="btn btn-primary"><g:message code="application.submit.button" /></button></g:link>
+    </div>
   </div>
 </div>
 </body>

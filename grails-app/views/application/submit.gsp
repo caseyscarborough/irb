@@ -9,8 +9,6 @@
   <meta name='layout' content='main'/>
   <title>Submit New Application</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Generic page styles -->
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
   <!-- blueimp Gallery styles -->
   <link rel="stylesheet" href="http://blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
   <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
@@ -165,8 +163,6 @@
 <script src="http://blueimp.github.io/JavaScript-Load-Image/js/load-image.min.js"></script>
 <!-- The Canvas to Blob plugin is included for image resizing functionality -->
 <script src="http://blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
-<!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <!-- blueimp Gallery script -->
 <script src="http://blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
 <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
