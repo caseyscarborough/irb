@@ -143,4 +143,5 @@ grails.plugin.springsecurity.logout.postOnly = false
 
 irb {
   supportedFiletypes = [ 'PDF', 'JPG', 'PNG', 'GIF', 'DOCX', 'DOC', 'XLS', 'XLSX', 'JPEG' ]
+  maxFileSize = 10000000 // 10MB
 }

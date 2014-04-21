@@ -9,5 +9,5 @@ if (typeof jQuery !== 'undefined') {
 }
 
 $(function() {
-    $(document).foundation();
+    $(".tooltip-link").tooltip({ placement: 'right' });
 });

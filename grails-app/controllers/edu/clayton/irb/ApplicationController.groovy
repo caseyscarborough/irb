@@ -46,7 +46,7 @@ class ApplicationController {
     // throws StringIndexOutOfBoundsException: String index out of range: -1 and can't
     // figure it out right now.
     if (file) {
-      render "{ \"files\": [ { \"name\": \"${filename}\", \"size\": ${file?.size}, \"url\": \"${path}\", \"deleteType\": \"DELETE\" } ] }"
+      render "{ \"files\": [ { \"name\": \"${filename}\", \"size\": ${file?.size} } ] }"
       return
     }
 

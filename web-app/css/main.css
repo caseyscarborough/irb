@@ -14,26 +14,18 @@
     display: none;
 }
 
-.vcard.users {
-    width: 100%;
-}
-
-.vcard.status {
-    width: 100%;
-}
-
-.users.disabled {
-    background: #ffdfe3;
-}
-
-.vcard .smaller {
-    font-size: 13px;
-}
-
 .textarea-tall {
     min-height: 150px;
 }
 
 .no-margin {
     margin: 0;
+}
+
+.progress {
+    margin-bottom: 10px;
+}
+
+.cancel i {
+    cursor: pointer;
 }
