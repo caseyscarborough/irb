@@ -9,13 +9,11 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<title>IRB &middot; <g:layoutTitle /></title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap.min.css')}" type="text/css">
-    <link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
+    <r:require modules="bootstrap" />
 		<g:layoutHead/>
     <g:javascript library="application" />
     <g:javascript library="jquery" />
     <r:layoutResources />
-    <script src="${resource(dir: 'js', file: 'bootstrap.min.js')}" type="text/javascript"></script>
     <script>
       $(function() {
         var message = ${flash?.message?.size() > 0};
@@ -25,6 +23,7 @@
         if (error)   { $("#flash-error").show(); }
       });
     </script>
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
 </head>
 	<body>
     <g:render template="../shared/navBar" />
