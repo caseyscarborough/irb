@@ -7,7 +7,7 @@ $(function () {
     $('#fileupload').fileupload({
         // Uncomment the following to send cross-domain cookies:
         //xhrFields: {withCredentials: true},
-        url: '${createLink(controller: 'application', action: 'upload')}',
+        url: '${createLink(controller: 'file', action: 'upload')}',
         maxFileSize: ${maxFileSize},
         acceptFileTypes: /(\.|\/)(${supportedFiletypes})$/i
     });

@@ -23,7 +23,7 @@
         <textarea id="description" class="form-control textarea-tall" title="description" placeholder="${message(code: 'application.description.label')}"></textarea>
       </div>
       <p>Use the following form to upload files for your application. Supported filetypes are <irb:supportedFiletypes/>.</p>
-      <form id="fileupload" action="/irb/application/upload/" method="POST" enctype="multipart/form-data">
+      <form id="fileupload" action="${createLink(controller: 'file', action: 'upload')}" method="POST" enctype="multipart/form-data">
         <div class="row fileupload-buttonbar">
           <div class="col-lg-7">
             <span class="btn btn-success fileinput-button">
@@ -35,10 +35,16 @@
               <i class="glyphicon glyphicon-upload"></i>
               <span>Start upload</span>
             </button>
-            <button type="reset" class="btn btn-danger cancel">
+            <button type="reset" class="btn btn-warning cancel">
               <i class="glyphicon glyphicon-ban-circle"></i>
               <span>Cancel upload</span>
             </button>
+            <button type="reset" class="btn btn-danger delete">
+              <i class="glyphicon glyphicon-trash"></i>
+              <span>Delete</span>
+            </button>
+            <input type="checkbox" class="toggle">
+
             <span class="fileupload-process"></span>
           </div>
           <div class="col-lg-5 fileupload-progress fade">
@@ -123,8 +129,9 @@
                 </button>
                 <input type="checkbox" name="delete" value="1" class="toggle">
             {% } else { %}
-                <a title="Dismiss" class="cancel tooltip-link">
+                <button title="Dismiss" class="btn btn-warning cancel">
                     <i class="glyphicon glyphicon-remove"></i>
+                    <span>Dismiss</span>
                 </a>
             {% } %}
         </td>
