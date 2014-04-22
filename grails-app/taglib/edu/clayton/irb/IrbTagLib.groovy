@@ -28,7 +28,7 @@ class IrbTagLib {
 
   def supportedFiletypes = { attrs ->
     def output = new StringBuilder()
-    grailsApplication.config.irb.supportedFiletypes.eachWithIndex { ft, i ->
+    grailsApplication.config.irb.supportedFiletypes.sort { it }.eachWithIndex { ft, i ->
       if (i != 0) {
         output.append(', ')
       }

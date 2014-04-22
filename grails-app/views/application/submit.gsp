@@ -18,7 +18,7 @@
       <form id="fileupload" action="${createLink(controller: 'application', action: 'save')}" method="POST" enctype="multipart/form-data">
         <div class="form-group">
           <label for="title"><g:message code="application.title.label" /></label>
-          <input id="title" class="form-control" name="title" value="${applicationInstance?.title}" placeholder="${message(code: 'application.title.label')}" />
+          <input id="title" class="form-control" name="title" value="${applicationInstance?.title}" placeholder="${message(code: 'application.title.label')}" required />
         </div>
         <div class="form-group">
           <label for="description"><g:message code="application.description.label" /></label>
@@ -56,7 +56,7 @@
           </div>
         </div>
         <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
-        <g:submitButton name="Submit New Application" class="btn btn-primary btn-lg" />
+        <g:submitButton name="${message(code: 'application.submit.button.label')}" class="btn btn-primary btn-lg" />
       </form>
       <br>
     </div>

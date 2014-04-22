@@ -7,8 +7,10 @@ class UrlMappings {
       }
     }
 
+    "/applications"(controller: "application", action: "index")
     "/user/profile/$username"(controller: "user", action: "profile")
     "/login"(controller: "login", action: "auth")
+    "/logout"(controller: "logout", action: "index")
     "/"(controller: "home", action: "index")
     "500"(view: '/error')
     "404"(view: '/404')

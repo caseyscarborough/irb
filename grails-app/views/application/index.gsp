@@ -32,7 +32,7 @@
       </g:else>
 
       <h3>Options</h3>
-      <g:link action="submit"><button class="btn btn-primary"><g:message code="application.submit.button" /></button></g:link>
+      <g:link action="submit"><button class="btn btn-primary"><g:message code="application.submit.new.button.label" /></button></g:link>
     </div>
   </div>
 </div>
