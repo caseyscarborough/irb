@@ -43,3 +43,51 @@
 .navbar-inverse .navbar-brand {
     color: #eee;
 }
+
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
+    background-color: #008CBA;
+}
+
+.btn-primary, .alert-info {
+    background-color: #008CBA;
+    border-color: #007095;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #007095; ;
+}
+
+.btn-success {
+    background-color: #43ac6a;
+    border-color: #368a55;
+}
+
+.btn-success:hover {
+    background-color: #368a55;
+}
+
+.btn-danger, .alert-danger {
+    color: #fff;
+    background-color: #d2322d;
+    border-color: #ac2925;
+}
+
+.btn {
+    -webkit-transition: background-color 0.2s;
+    -moz-transition: background-color 0.2s;
+    transition: background-color 0.2s;
+    border-radius: 0;
+}
+
+.alert, .panel, .form-control, .progress, .navbar-nav > li > .dropdown-menu {
+    border-radius: 0;
+}
+
+.alert-dismissable .close {
+    color: #333
+}
+
+.alert-dismissable .close:hover {
+    color: #111;
+}
