@@ -8,9 +8,13 @@ class ApplicationFile {
   String filename
   User user
 
+  def grailsLinkGenerator
+
+  static transients = ['grailsLinkGenerator']
+
   def afterDelete() {
-    log.info("Deleting file at ${this.path()}")
-    def file = new File(this.path())
+    log.info("Deleting file at ${this.path}")
+    def file = new File(this.path)
     file.delete()
   }
 
@@ -18,12 +22,20 @@ class ApplicationFile {
     application nullable: true
   }
 
-  String path() {
+  String getPath() {
     "${location}/${filename}"
   }
 
-  String extension() {
+  String getExtension() {
     filename.substring(filename.lastIndexOf(".") + 1)
+  }
+
+  String getDownloadUrl() {
+    grailsLinkGenerator.link(controller: 'file', action: 'download', id: this?.id)
+  }
+
+  String getDeleteUrl() {
+    grailsLinkGenerator.link(controller: 'file', action: 'delete', id: this?.id)
   }
 
   String toString() {

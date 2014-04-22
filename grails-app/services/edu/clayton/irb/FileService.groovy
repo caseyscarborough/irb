@@ -22,7 +22,7 @@ class FileService {
     def currentUser = springSecurityService.currentUser
 
     if (file.user == currentUser) {
-      def download = new File(file?.path())
+      def download = new File(file?.path)
       if (download?.exists()) {
         response.setContentType("application/octet-stream")
         response.setHeader("Content-disposition", "attachment;filename=${file?.filename}")
@@ -59,10 +59,7 @@ class FileService {
       f?.transferTo(new File("${location}/${filename}"))
 
       def file = new ApplicationFile(filename: filename, location: location, user: currentUser, size: f?.size).save(flush: true)
-      def url = grailsLinkGenerator.link(action: 'download', params: [id: file?.id])
-      def deleteUrl = grailsLinkGenerator.link(action: 'delete', params: [id: file?.id])
-
-      def jsonResponse = [files: [[name: file?.filename, size: file?.size, url: url, deleteUrl: deleteUrl, deleteType: 'DELETE']]]
+      def jsonResponse = [files: [[name: file?.filename, size: file?.size, url: file?.downloadUrl, deleteUrl: file?.deleteUrl, deleteType: 'DELETE']]]
       return jsonResponse
     }
   }
@@ -98,9 +95,7 @@ class FileService {
     // Get the files that have not been associated with an application and display them.
     def jsonResponse = [files: []]
     ApplicationFile.findAllByUserAndApplication(currentUser, null).each { file ->
-      def url = grailsLinkGenerator.link(action: 'download', params: [id: file?.id])
-      def deleteUrl = grailsLinkGenerator.link(action: 'delete', params: [id: file.id])
-      jsonResponse['files'] << [name: file?.filename, size: file?.size, url: url, deleteUrl: deleteUrl, deleteType: 'DELETE']
+      jsonResponse['files'] << [name: file?.filename, size: file?.size, url: file?.downloadUrl, deleteUrl: file?.deleteUrl, deleteType: 'DELETE']
     }
     return jsonResponse
   }
