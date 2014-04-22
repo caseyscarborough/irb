@@ -5,8 +5,10 @@ class ApplicationFile {
   Application application
   String location
   String filename
+  User user
 
   static constraints = {
+    application nullable: true
   }
 
   String path() {

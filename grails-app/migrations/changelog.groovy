@@ -16,4 +16,6 @@ databaseChangeLog = {
 
 	include file: '201404201840-add-title-and-description-to-application.groovy'
 
+
+	include file: '201404212115-add-user-and-application-to-file.groovy'
 }

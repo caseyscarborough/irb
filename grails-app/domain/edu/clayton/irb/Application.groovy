@@ -2,14 +2,14 @@ package edu.clayton.irb
 
 class Application {
 
-  User user
-  User reviewedBy
   Date dateCreated
   Date lastUpdated
   Status status
   String title
   String description
   String comments
+  User user
+  User reviewedBy
 
   static belongsTo = [User]
 
