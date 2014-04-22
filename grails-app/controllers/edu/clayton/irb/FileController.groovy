@@ -6,75 +6,39 @@ import grails.plugin.springsecurity.annotation.Secured
 @Secured('IS_AUTHENTICATED_FULLY')
 class FileController {
 
-  def springSecurityService
+  def fileService
 
+  /**
+   * Upload handler used for the upload form for ApplicationController#submit.
+   * Passes the uploaded file to the FileService for uploading and processing.
+   */
   def upload() {
-    def f = params['files[]']
-    def currentUser = springSecurityService.currentUser
+    def file = params['files[]']
 
-    if (f) {
-
-      // If the file is empty, don't upload it and return an error.
-      if (f?.empty) {
-        log.info("An empty file upload was attempted")
-        render "{ \"files\": [ { \"name\": \"${f?.originalFilename}\", \"size\": ${f?.size}, \"error\": \"File cannot be empty.\" } ] }"
-        return
-      }
-
-      File location = new File("${grailsApplication.config.irb.uploadLocation}/${currentUser?.username}")
-      location.mkdirs()
-
-      String filename = "${new Date().format('yyyyMMddHHmmss')}_${f?.originalFilename}"
-
-      // Upload the file.
-      log.info("Uploading file '${filename}' to '${location}'")
-      f?.transferTo(new File("${location}/${filename}"))
-
-      def file = new ApplicationFile(filename: filename, location: location, user: currentUser, size: f?.size).save(flush: true)
-      def url = createLink(action: 'download', params: [id: file?.id])
-      def deleteUrl = createLink(action: 'delete', params: [id: file?.id])
-
-      def jsonResponse = [files: [[name: file?.filename, size: file?.size, url: url, deleteUrl: deleteUrl, deleteType: 'DELETE']]]
-      render jsonResponse as JSON
+    // If a file exists in the request, upload it.
+    if (file) {
+      render fileService.upload(file) as JSON
       return
     }
 
-    // Get the files that have not been associated with an application and display them.
-    def jsonResponse = [files: []]
-    ApplicationFile.findAllByUserAndApplication(currentUser, null).each { file ->
-      def url = createLink(action: 'download', params: [id: file?.id])
-      def deleteUrl = createLink(action: 'delete', params: [id: file.id])
-      jsonResponse['files'] << [name: file?.filename, size: file?.size, url: url, deleteUrl: deleteUrl, deleteType: 'DELETE']
-    }
-    render jsonResponse as JSON
+    // If not, return a list of pending files.
+    render fileService.getPendingFileList() as JSON
   }
 
+  /**
+   * Downloads a file based on it's ID.
+   * @param file ApplicationFile, the file to be downloaded.
+   */
   def download(ApplicationFile file) {
-    def currentUser = springSecurityService.currentUser
-
-    if (file.user == currentUser) {
-      def download = new File(file?.path())
-      if (download?.exists()) {
-        response.setContentType("application/octet-stream")
-        response.setHeader("Content-disposition", "attachment;filename=${file?.filename}")
-        response.outputStream << download?.bytes
-        response.outputStream.flush()
-        return
-      }
-    }
+    fileService.download(file, response)
   }
 
+  /**
+   * Downloads a file based on it's ID.
+   * @param file ApplicationFile, the file to be downloaded.
+   */
   def delete(ApplicationFile file) {
-    def currentUser = springSecurityService.currentUser
-    def success = false
-
-    // If the file belongs to the user, and is not associated with an application, allow the user to delete it.
-    if (file.user == currentUser && file.application == null) {
-      file.delete()
-      success = true
-    }
-
-    def jsonResponse = [files: [[(file?.filename): success]]]
-    render jsonResponse as JSON
+    render fileService.delete(file) as JSON
   }
+
 }
