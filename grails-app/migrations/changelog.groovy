@@ -18,4 +18,6 @@ databaseChangeLog = {
 
 
 	include file: '201404212115-add-user-and-application-to-file.groovy'
+
+	include file: '201404212143-add-size-to-file.groovy'
 }

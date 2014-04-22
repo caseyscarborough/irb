@@ -3,6 +3,7 @@ package edu.clayton.irb
 class ApplicationFile {
 
   Application application
+  Integer size
   String location
   String filename
   User user
