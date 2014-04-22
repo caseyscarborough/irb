@@ -14,7 +14,15 @@
       <h3>Application List</h3>
       <g:if test="${applicationInstanceList.size() > 0}">
         <g:each in="${applicationInstanceList}" var="applicationInstance">
-
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">${applicationInstance?.title}</h3>
+            </div>
+            <div class="panel-body">
+              Description: ${applicationInstance?.description ?: "None"}<br>
+              Current Status: ${applicationInstance?.status}
+            </div>
+          </div>
         </g:each>
       </g:if>
       <g:else>

@@ -14,16 +14,17 @@
     <div class="col-md-1 hidden-sm"></div>
     <div class="col-md-10 col-sm-12">
       <h1>Submit New Application</h1>
-      <div class="form-group">
-        <label for="title"><g:message code="application.title.label" /></label>
-        <input id="title" class="form-control" name="title" placeholder="${message(code: 'application.title.label')}" />
-      </div>
-      <div class="form-group">
-        <label for="description"><g:message code="application.description.label" /></label>
-        <textarea id="description" class="form-control textarea-tall" title="description" placeholder="${message(code: 'application.description.label')}"></textarea>
-      </div>
-      <p>Use the following form to upload files for your application. Supported filetypes are <irb:supportedFiletypes/>.</p>
-      <form id="fileupload" action="${createLink(controller: 'file', action: 'upload')}" method="POST" enctype="multipart/form-data">
+      <g:render template="../shared/alerts" />
+      <form id="fileupload" action="${createLink(controller: 'application', action: 'save')}" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="title"><g:message code="application.title.label" /></label>
+          <input id="title" class="form-control" name="title" value="${applicationInstance?.title}" placeholder="${message(code: 'application.title.label')}" />
+        </div>
+        <div class="form-group">
+          <label for="description"><g:message code="application.description.label" /></label>
+          <textarea id="description" class="form-control textarea-tall" name="description" title="description" placeholder="${message(code: 'application.description.label')}">${applicationInstance?.description}</textarea>
+        </div>
+        <p>Use the following form to upload files for your application. Supported filetypes are <irb:supportedFiletypes/>.</p>
         <div class="row fileupload-buttonbar">
           <div class="col-lg-7">
             <span class="btn btn-success fileinput-button">
@@ -55,6 +56,7 @@
           </div>
         </div>
         <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
+        <g:submitButton name="Submit New Application" class="btn btn-primary btn-lg" />
       </form>
       <br>
     </div>
@@ -83,7 +85,7 @@
                 </button>
             {% } %}
             {% if (!i) { %}
-                <button class="btn btn-danger cancel">
+                <button class="btn btn-warning cancel">
                     <i class="glyphicon glyphicon-ban-circle"></i>
                     <span>Cancel</span>
                 </button>
