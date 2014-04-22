@@ -6,6 +6,7 @@ class ApplicationFile {
   Integer size
   String location
   String filename
+  String hash
   User user
 
   def grailsLinkGenerator
@@ -31,7 +32,7 @@ class ApplicationFile {
   }
 
   String getDownloadUrl() {
-    grailsLinkGenerator.link(controller: 'file', action: 'download', id: this?.id)
+    grailsLinkGenerator.link(controller: 'file', action: 'download', params: [fileHash: this?.hash])
   }
 
   String getDeleteUrl() {

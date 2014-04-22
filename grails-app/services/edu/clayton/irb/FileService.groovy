@@ -18,8 +18,10 @@ class FileService {
    * @param response HttpServletResponse - The Grails response object.
    * @return void
    */
-  def download(ApplicationFile file, HttpServletResponse response) {
+  def download(String fileHash, HttpServletResponse response) {
     def currentUser = springSecurityService.currentUser
+
+    def file = ApplicationFile.findByHash(fileHash)
 
     if (file.user == currentUser) {
       def download = new File(file?.path)
@@ -52,13 +54,13 @@ class FileService {
       File location = new File("${grailsApplication.config.irb.uploadLocation}/${currentUser?.username}")
       location.mkdirs()
 
-      String filename = "${new Date().format('yyyyMMddHHmmss')}_${f?.originalFilename}"
+      String filename = generateFilename(f?.originalFilename)
 
       // Upload the file.
       log.info("Uploading file '${filename}' to '${location}'")
       f?.transferTo(new File("${location}/${filename}"))
 
-      def file = new ApplicationFile(filename: filename, location: location, user: currentUser, size: f?.size).save(flush: true)
+      def file = new ApplicationFile(filename: filename, location: location, user: currentUser, size: f?.size, hash: filename.encodeAsSHA1()).save(flush: true)
       def jsonResponse = [files: [[name: file?.filename, size: file?.size, url: file?.downloadUrl, deleteUrl: file?.deleteUrl, deleteType: 'DELETE']]]
       return jsonResponse
     }
@@ -98,6 +100,12 @@ class FileService {
       jsonResponse['files'] << [name: file?.filename, size: file?.size, url: file?.downloadUrl, deleteUrl: file?.deleteUrl, deleteType: 'DELETE']
     }
     return jsonResponse
+  }
+
+  private String generateFilename(String originalFilename) {
+    def filename = originalFilename.toLowerCase().replace(' ', '_')
+    def date = new Date().format('yyyyMMddHHmmss')
+    return "${date}_${filename}"
   }
 
 }

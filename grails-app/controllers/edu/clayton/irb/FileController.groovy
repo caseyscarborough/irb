@@ -29,8 +29,8 @@ class FileController {
    * Downloads a file based on it's ID.
    * @param file ApplicationFile, the file to be downloaded.
    */
-  def download(ApplicationFile file) {
-    fileService.download(file, response)
+  def download(String fileHash) {
+    fileService.download(fileHash, response)
   }
 
   /**
