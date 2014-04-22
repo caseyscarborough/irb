@@ -20,7 +20,6 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Site Administration <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><g:link controller="admin" class="dropdown-toggle" data-toggle="dropdown">Administration</g:link></li>
             <li><g:link controller="user" action="manage"><g:message code="user.management.label" /></g:link></li>
             <li><g:link controller="status" action="manage"><g:message code="status.management.label" /></g:link></li>
           </ul>

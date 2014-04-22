@@ -131,19 +131,19 @@
     </tr>
 {% } %}
 </script>
-<script src="${resource(dir: 'js/uploader/js/vendor', file: 'jquery.ui.widget.js')}"></script>
-<script src="${resource(dir: 'js/uploader/js', file: 'tmpl.min.js')}"></script>
-<script src="${resource(dir: 'js/uploader/js', file: 'load-image.min.js')}"></script>
-<script src="${resource(dir: 'js/uploader/js', file: 'canvas-to-blob.min.js')}"></script>
-<script src="${resource(dir: '/js/uploader/js', file: 'jquery.iframe-transport.js')}"></script>
-<script src="${resource(dir: '/js/uploader/js', file: 'jquery.fileupload.js')}"></script>
-<script src="${resource(dir: '/js/uploader/js', file: 'jquery.fileupload-process.js')}"></script>
-<script src="${resource(dir: '/js/uploader/js', file: 'jquery.fileupload-image.js')}"></script>
-<script src="${resource(dir: '/js/uploader/js', file: 'jquery.fileupload-validate.js')}"></script>
-<script src="${resource(dir: '/js/uploader/js', file: 'jquery.fileupload-ui.js')}"></script>
-<script src="${createLink(controller: 'javascript', action: 'main')}"></script>
+<script type="text/javascript" src="${resource(dir: 'js/uploader/js/vendor', file: 'jquery.ui.widget.js')}"></script>
+<script type="text/javascript" src="${resource(dir: 'js/uploader/js', file: 'tmpl.min.js')}"></script>
+<script type="text/javascript" src="${resource(dir: 'js/uploader/js', file: 'load-image.min.js')}"></script>
+<script type="text/javascript" src="${resource(dir: 'js/uploader/js', file: 'canvas-to-blob.min.js')}"></script>
+<script type="text/javascript" src="${resource(dir: '/js/uploader/js', file: 'jquery.iframe-transport.js')}"></script>
+<script type="text/javascript" src="${resource(dir: '/js/uploader/js', file: 'jquery.fileupload.js')}"></script>
+<script type="text/javascript" src="${resource(dir: '/js/uploader/js', file: 'jquery.fileupload-process.js')}"></script>
+<script type="text/javascript" src="${resource(dir: '/js/uploader/js', file: 'jquery.fileupload-image.js')}"></script>
+<script type="text/javascript" src="${resource(dir: '/js/uploader/js', file: 'jquery.fileupload-validate.js')}"></script>
+<script type="text/javascript" src="${resource(dir: '/js/uploader/js', file: 'jquery.fileupload-ui.js')}"></script>
+<script type="text/javascript" src="${createLink(controller: 'javascript', action: 'main')}"></script>
 <!--[if (gte IE 8)&(lt IE 10)]>
-<script src="${resource(dir: '/js/uploader/js/cors', file: 'jquery.xdr-transport.js')}"></script>
+<script src="${resource(dir: '/js/uploader/js/cors', file: 'jquery.xdr-transport.js')}" type="text/javascript"></script>
 <![endif]-->
 </body>
 </html>

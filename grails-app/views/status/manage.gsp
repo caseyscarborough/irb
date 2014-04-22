@@ -11,7 +11,7 @@
     <div class="col-md-10 col-sm-1">
       <h1><g:message code="status.management.label" /></h1>
       <g:render template="../shared/alerts" />
-      <br><h3>Status List</h3>
+      <h3>Status List</h3>
       <g:if test="${statusInstanceList.size() > 0}">
         <g:each in="${statusInstanceList}" var="statusInstance">
           <div class="panel panel-default">
