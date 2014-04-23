@@ -50,7 +50,7 @@ class UserController {
             def role = Role.get(params?.role)
 
             // If role changed, remove previous roles and create new one.
-            if (!userInstance.hasRole(role.authority)) {
+            if (role && !userInstance.hasRole(role?.authority)) {
               UserRole.findAllByUser(userInstance).each { r -> r.delete(flush: true) }
               UserRole.create(userInstance, role, true)
             }
