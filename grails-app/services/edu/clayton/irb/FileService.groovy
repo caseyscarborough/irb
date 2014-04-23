@@ -60,8 +60,8 @@ class FileService {
       log.info("Uploading file '${filename}' to '${location}'")
       f?.transferTo(new File("${location}/${filename}"))
 
-      def file = new ApplicationFile(filename: filename, location: location, user: currentUser, size: f?.size, hash: filename.encodeAsSHA1()).save(flush: true)
-      def jsonResponse = [files: [[name: file?.filename, size: file?.size, url: file?.downloadUrl, deleteUrl: file?.deleteUrl, deleteType: 'DELETE']]]
+      def file = new ApplicationFile(filename: filename, location: location, user: currentUser, size: f?.size, hash: filename.encodeAsSHA1(), originalFilename: f?.originalFilename).save(flush: true)
+      def jsonResponse = [files: [[name: file?.originalFilename, size: file?.size, url: file?.downloadUrl, deleteUrl: file?.deleteUrl, deleteType: 'DELETE']]]
       return jsonResponse
     }
   }
@@ -97,15 +97,15 @@ class FileService {
     // Get the files that have not been associated with an application and display them.
     def jsonResponse = [files: []]
     ApplicationFile.findAllByUserAndApplication(currentUser, null).each { file ->
-      jsonResponse['files'] << [name: file?.filename, size: file?.size, url: file?.downloadUrl, deleteUrl: file?.deleteUrl, deleteType: 'DELETE']
+      jsonResponse['files'] << [name: file?.originalFilename, size: file?.size, url: file?.downloadUrl, deleteUrl: file?.deleteUrl, deleteType: 'DELETE']
     }
     return jsonResponse
   }
 
   private String generateFilename(String originalFilename) {
-    def filename = originalFilename.toLowerCase().replace(' ', '_')
+    def filename = originalFilename.replace(' ', '_')
     def date = new Date().format('yyyyMMddHHmmss')
-    return "${date}_${filename}"
+    return "${date}-${filename}"
   }
 
 }
