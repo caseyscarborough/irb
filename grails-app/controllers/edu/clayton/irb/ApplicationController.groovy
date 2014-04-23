@@ -1,5 +1,6 @@
 package edu.clayton.irb
 
+import grails.plugin.springsecurity.SpringSecurityUtils
 import grails.plugin.springsecurity.annotation.Secured
 import grails.transaction.Transactional
 
@@ -7,6 +8,7 @@ import grails.transaction.Transactional
 @Transactional
 class ApplicationController {
 
+  def grailsApplication
   def springSecurityService
 
   def index() {
@@ -42,11 +44,32 @@ class ApplicationController {
     def currentUser = springSecurityService.currentUser
     if (applicationInstance && applicationInstance.user == currentUser) {
       def applicationFileList = applicationInstance?.files?.sort { it.filename }
-      return [applicationInstance: applicationInstance, applicationFileList: applicationFileList, userInstance: applicationInstance?.user]
+      return [
+          applicationInstance: applicationInstance,
+          applicationFileList: applicationFileList,
+          userInstance: applicationInstance?.user,
+          reviewerInstanceList: User.findAllHavingRole(grailsApplication.config.irb.roles.names.reviewer).sort { it?.firstName }
+      ]
     }
 
     flash.error = message(code: 'application.not.found.error', args: [params?.id])
     redirect(action: 'index')
   }
 
+  def assign(Application applicationInstance) {
+    if (applicationInstance) {
+      def reviewer = User.get(params?.reviewer)
+
+      if (reviewer) {
+        applicationInstance?.assignedTo = reviewer
+        applicationInstance?.status = Status.findByType(StatusType.ASSIGNED_TO_REVIEWER)
+
+        if (applicationInstance.save(flush: true)) {
+          flash.message = message(code: 'application.assign.success', args: [reviewer])
+          redirect(action: 'show', id: applicationInstance?.id)
+          return
+        }
+      }
+    }
+  }
 }

@@ -3,21 +3,37 @@
   <meta name='layout' content='main'/>
   <title><g:message code="application.show.label" /></title>
   <script>
+    function getReviewCountFor(id) {
+      $.ajax({
+        type: "POST",
+        url:  "${createLink(controller: 'user', action: 'reviewCount')}/" + id,
+        success: function(data) { $("#application-review-count").html(data); },
+        error: function(data) { alert("An error occurred. Please try again later."); }
+      });
+    }
     $(function() {
       $('.tooltip-link').tooltip({
         placement: 'right',
         container: 'body'
+      });
+
+      getReviewCountFor($("#reviewer option:first").val());
+
+      $('#reviewer').change(function() {
+        getReviewCountFor($(this).val());
       });
     });
   </script>
 </head>
 
 <body>
+<g:render template="assignModal" />
 <div class="container">
   <div class="row">
     <div class="col-md-1 hidden-sm"></div>
     <div class="col-md-10 col-sm-12">
       <h1><g:message code="application.show.label" /></h1>
+      <g:render template="../shared/alerts" />
       <h3>Information</h3>
       <table class="table table-striped table-hover table-responsive">
         <thead>
@@ -25,6 +41,7 @@
             <th>Title</th>
             <th>Description</th>
             <th>Status</th>
+            <g:if test="${applicationInstance?.assignedTo}"><th>Assigned To</th></g:if>
           </tr>
         </thead>
         <tbody>
@@ -32,6 +49,7 @@
             <td>${applicationInstance?.title}</td>
             <td>${applicationInstance?.description ?: "None"}</td>
             <td><a title="${applicationInstance?.status?.description}" class="tooltip-link">${applicationInstance?.status}</a></td>
+            <g:if test="${applicationInstance?.assignedTo}"><td>${applicationInstance?.assignedTo}</td></g:if>
           </tr>
         </tbody>
       </table>
@@ -64,7 +82,7 @@
           <th>Username</th>
           <th>Name</th>
           <th>Email</th>
-          <th>Role</th>
+          <th>Roles</th>
           <th>Active?</th>
         </tr>
         </thead>
@@ -73,12 +91,16 @@
           <td><g:link action="profile" title="View Profile" class="tooltip-link" params="${[username: userInstance?.username]}">${userInstance?.username}</g:link></td>
           <td>${userInstance}</td>
           <td><a title="Email ${userInstance}" class="tooltip-link" href="mailto:${userInstance?.email}">${userInstance?.email}</a></td>
-          <td>${userInstance?.role}</td>
+          <td>${userInstance?.authoritiesString}</td>
           <td>${userInstance?.enabled ? "Yes" : "No"}</td>
         </tr>
         </tbody>
         </table>
       </sec:ifAllGranted>
+      <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_IRB_CHAIR">
+        <h3>Options</h3>
+        <p><button class="btn btn-primary" data-toggle="modal" data-target="#assignModal">Assign To Reviewer</button></p>
+      </sec:ifAnyGranted>
     </div>
   </div>
 </div>

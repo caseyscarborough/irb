@@ -7,7 +7,8 @@ public enum StatusType {
   REVIEWED(3),
   DENIED(4),
   APPROVED(5),
-  ATTENTION_NEEDED(6)
+  ATTENTION_NEEDED(6),
+  ASSIGNED_TO_REVIEWER(7)
 
   final int id
 

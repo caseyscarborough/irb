@@ -2,6 +2,10 @@
     font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
 }
 
+a:hover, a:visited {
+    text-decoration: none;
+}
+
 .wrapper {
     margin-top: 20px;
 }
@@ -30,10 +34,9 @@
     margin-bottom: 10px;
 }
 
-.cancel i {
+.tooltip-link, .cancel i {
     cursor: pointer;
 }
-
 
 /* Bootstrap Overrides */
 .navbar {

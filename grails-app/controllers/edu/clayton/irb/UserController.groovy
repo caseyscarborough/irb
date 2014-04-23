@@ -1,5 +1,6 @@
 package edu.clayton.irb
 
+import grails.plugin.springsecurity.SpringSecurityUtils
 import grails.plugin.springsecurity.annotation.Secured
 import grails.transaction.Transactional
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
@@ -182,6 +183,13 @@ class UserController {
     }
 
     redirect(action: 'manage')
+  }
+
+  @Secured('IS_AUTHENTICATED_FULLY')
+  def reviewCount(User userInstance) {
+    if (SpringSecurityUtils.isAjax(request)) {
+      render Application.findAllByAssignedTo(userInstance).size()
+    }
   }
 
 }
