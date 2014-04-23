@@ -110,8 +110,15 @@ class UserController {
 
     // If the save was successful
     if (userInstance.save(flush: true)) {
-      // Create the role for the user and redirect to the manage users page.
-      UserRole.create(userInstance, Role.get(params?.role), true)
+      // Create the roles for the user and redirect to the manage users page.
+      def roleCount = 0
+      Role.all.each { r ->
+        if (params["role-${r?.id}"] == 'on') {
+          UserRole.create(userInstance, r, true)
+          roleCount++
+        }
+      }
+
       flash.message = message(code: 'user.create.success')
       redirect(action: 'manage')
       return

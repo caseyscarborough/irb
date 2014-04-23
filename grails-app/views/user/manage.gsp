@@ -18,7 +18,7 @@
           <th>Username</th>
           <th>Name</th>
           <th>Email</th>
-          <th>Role</th>
+          <th>Roles</th>
           <th>Active?</th>
           <th style="width:15%">Options</th>
         </tr>
@@ -29,7 +29,7 @@
             <td><g:link action="profile" params="${[username: userInstance?.username]}">${userInstance?.username}</g:link></td>
             <td>${userInstance}</td>
             <td><a href="mailto:${userInstance?.email}">${userInstance?.email}</a></td>
-            <td>${userInstance?.role}</td>
+            <td>${userInstance?.authoritiesString}</td>
             <td>${userInstance?.enabled ? "Yes" : "No"}</td>
             <td>
               <g:if test="${userInstance != currentUser}">
@@ -54,7 +54,7 @@
             <div class="panel-body">
               <g:link action="profile" params="${[username: userInstance?.username]}">${userInstance?.username}</g:link><br>
               <a href="mailto:${userInstance?.email}">${userInstance?.email}</a><br>
-              ${userInstance?.role}<br>
+              ${userInstance?.authoritiesString}<br>
               <g:if test="${userInstance != currentUser}">
                 <g:if test="${userInstance?.enabled}">
                   <g:link action="disable" id="${userInstance?.id}" onclick="return confirm('Are you sure?')">Disable</g:link>

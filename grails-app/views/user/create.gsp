@@ -32,14 +32,13 @@
           <label for="password"><g:message code="user.password.label" /></label>
           <input type="password" id="password" class="form-control" name="password" value="" placeholder="${message(code: 'user.password.label')}" required />
         </div>
-        <div class="form-group">
-          <label for="role"><g:message code="user.role.label" /></label>
-          <select id="role" name="role" class="form-control">
-            <g:each in="${roleInstanceList}" var="roleInstance">
-              <option value="${roleInstance?.id}">${roleInstance}</option>
-            </g:each>
-          </select>
-        </div>
+        <strong>Roles</strong>
+        <g:each in="${roleInstanceList}" var="roleInstance">
+          <div class="checkbox">
+            <label for="role-${roleInstance?.id}">${roleInstance}</label>
+            <input type="checkbox" id="role-${roleInstance?.id}" name="role-${roleInstance?.id}" />
+          </div>
+        </g:each>
         <g:submitButton id="submit" name="submit" class="btn btn-primary" value="${message(code: 'user.create.submit.button')}" />
         <br><br><g:link action="manage">Return to <g:message code="user.management.label" /></g:link>
       </form>

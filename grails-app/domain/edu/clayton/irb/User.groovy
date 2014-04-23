@@ -32,8 +32,15 @@ class User {
 		UserRole.findAllByUser(this).collect { it.role } as Set
 	}
 
-  Role getRole() {
-    getAuthorities().getAt(0)
+  String getAuthoritiesString() {
+    def output = new StringBuilder()
+    this.getAuthorities().eachWithIndex { a, i ->
+      if (i > 0) {
+        output.append(", ")
+      }
+      output.append(a)
+    }
+    return output.toString()
   }
 
   boolean hasRole(String role) {
@@ -49,6 +56,21 @@ class User {
 			encodePassword()
 		}
 	}
+
+  static Set<User> findAllHavingRole(String roleName) {
+    def users = []
+    def role = Role.findByAuthority(roleName)
+
+    if (role) {
+      User.findAllByEnabled(true).each { u ->
+        if (u.authorities.contains(role)) {
+          users << u
+        }
+      }
+      return users
+    }
+    return null
+  }
 
 	protected void encodePassword() {
 		password = springSecurityService.encodePassword(password)
