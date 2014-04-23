@@ -15,7 +15,7 @@ class UserController {
   def profile(String username) {
     User loggedInUser = springSecurityService.getCurrentUser()
     // If the user is admin, allow them to see any user's profile.
-    if (loggedInUser.hasRole('ROLE_ADMIN')) {
+    if (loggedInUser.hasRoleByAuthority('ROLE_ADMIN')) {
       User userInstance = User.findByUsername(username) ?: loggedInUser
       return [userInstance: userInstance, roleInstanceList: Role.all]
     }
@@ -41,18 +41,18 @@ class UserController {
 
     if (valid) {
       if (userInstance) {
-        if ((loggedInUser == userInstance) || loggedInUser.hasRole('ROLE_ADMIN')) {
+        if ((loggedInUser == userInstance) || loggedInUser.hasRoleByAuthority('ROLE_ADMIN')) {
           userInstance.firstName = params?.firstName
           userInstance.lastName  = params?.lastName
           userInstance.email     = params?.email
 
-          if (loggedInUser.hasRole('ROLE_ADMIN')) {
-            def role = Role.get(params?.role)
-
-            // If role changed, remove previous roles and create new one.
-            if (role && !userInstance.hasRole(role?.authority)) {
-              UserRole.findAllByUser(userInstance).each { r -> r.delete(flush: true) }
-              UserRole.create(userInstance, role, true)
+          if (loggedInUser.hasRoleByAuthority('ROLE_ADMIN')) {
+            // Remove previous roles and create new ones.
+            UserRole.findAllByUser(userInstance).each { r -> r.delete(flush: true) }
+            Role.all.each { r ->
+              if (params["role-${r?.id}"] == 'on') {
+                UserRole.create(userInstance, r, true)
+              }
             }
           }
 
@@ -111,11 +111,9 @@ class UserController {
     // If the save was successful
     if (userInstance.save(flush: true)) {
       // Create the roles for the user and redirect to the manage users page.
-      def roleCount = 0
       Role.all.each { r ->
         if (params["role-${r?.id}"] == 'on') {
           UserRole.create(userInstance, r, true)
-          roleCount++
         }
       }
 

@@ -43,8 +43,8 @@ class User {
     return output.toString()
   }
 
-  boolean hasRole(String role) {
-    return getAuthorities().contains(Role.findByAuthority(role))
+  boolean hasRoleByAuthority(String authority) {
+    return this.hasRole(Role.findByAuthority(authority))
   }
 
   boolean hasRole(Role role) {

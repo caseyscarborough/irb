@@ -1,3 +1,4 @@
+<%@ page import="edu.clayton.irb.Role" %>
 <html>
 <head>
   <meta name='layout' content='main'/>
