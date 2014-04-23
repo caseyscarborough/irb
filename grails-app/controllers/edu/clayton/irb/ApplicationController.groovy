@@ -1,6 +1,5 @@
 package edu.clayton.irb
 
-import grails.plugin.springsecurity.SpringSecurityUtils
 import grails.plugin.springsecurity.annotation.Secured
 import grails.transaction.Transactional
 
@@ -13,7 +12,32 @@ class ApplicationController {
 
   def index() {
     def currentUser = springSecurityService.currentUser
-    [applicationInstanceList: Application.findAllByUser(currentUser)]
+    def completedStatusTypes = [ Status.findByType(StatusType.APPROVED), Status.findByType(StatusType.DENIED), Status.findByType(StatusType.REVIEWED) ]
+
+    def model = [applicationInstanceList: Application.findAllByUser(currentUser)]
+    model
+  }
+
+  @Secured(['ROLE_ADMIN', 'ROLE_IRB_REVIEWER'])
+  def assignedToMe() {
+    def currentUser = springSecurityService.currentUser
+    [applicationInstanceList: Application.findAllByAssignedTo(currentUser)]
+  }
+
+  @Secured(['ROLE_ADMIN', 'ROLE_IRB_CHAIR'])
+  def pending() {
+    [applicationInstanceList: Application.findAllByStatus(Status.findByType(StatusType.PENDING))]
+  }
+
+  @Secured(['ROLE_ADMIN', 'ROLE_IRB_CHAIR'])
+  def underReview() {
+    [applicationInstanceList: Application.findAllByStatus(Status.findByType(StatusType.UNDER_REVIEW))]
+  }
+
+  @Secured(['ROLE_ADMIN', 'ROLE_IRB_CHAIR'])
+  def completed() {
+    def completedStatusTypes = [ Status.findByType(StatusType.APPROVED), Status.findByType(StatusType.DENIED), Status.findByType(StatusType.REVIEWED) ]
+    [applicationInstanceList: Application.findAllByStatusInList(completedStatusTypes)]
   }
 
   def submit() {
@@ -42,7 +66,7 @@ class ApplicationController {
 
   def show(Application applicationInstance) {
     def currentUser = springSecurityService.currentUser
-    if (applicationInstance && applicationInstance.user == currentUser) {
+    if (applicationInstance && (applicationInstance.user == currentUser || currentUser.hasRoleByAuthority('ROLE_ADMIN'))) {
       def applicationFileList = applicationInstance?.files?.sort { it.filename }
       return [
           applicationInstance: applicationInstance,

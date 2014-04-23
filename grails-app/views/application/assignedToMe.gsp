@@ -1,7 +1,7 @@
 <html>
 <head>
   <meta name='layout' content='main'/>
-  <title><g:message code="application.label" /></title>
+  <title><g:message code="application.assigned.to.me.label" /></title>
 </head>
 
 <body>
@@ -11,7 +11,7 @@
     <div class="col-md-10 col-sm-12">
       <h1><g:message code="application.label" /></h1>
       <g:render template="../shared/alerts" />
-      <h3><g:message code="application.mine.label" /></h3>
+      <h3><g:message code="application.assigned.to.me.label" /></h3>
       <g:if test="${applicationInstanceList.size() > 0}">
         <g:each in="${applicationInstanceList}" var="applicationInstance">
           <div class="panel panel-default">
@@ -27,11 +27,9 @@
       </g:if>
       <g:else>
         <div class="alert alert-info">
-          <g:message code="application.no.records" />
+          <g:message code="application.assigned.to.me.no.records" />
         </div>
       </g:else>
-      <h3>Options</h3>
-      <g:link action="submit"><button class="btn btn-primary"><g:message code="application.submit.new.button.label" /></button></g:link>
     </div>
   </div>
 </div>

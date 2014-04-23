@@ -13,11 +13,24 @@
     <div class="collapse navbar-collapse" id="navbar-collapse">
       <ul class="nav navbar-nav">
         <li<g:if test="${params.controller == 'home'}"> class="active"</g:if>><g:link controller="home">Home</g:link></li>
-        <li<g:if test="${params.controller == 'application'}"> class="active"</g:if>><g:link controller="application">Applications</g:link></li>
+        <li class="dropdown<g:if test="${params.controller == 'application'}"> active</g:if>">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Applications <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><g:link controller="application" action="index" ><g:message code="application.mine.label" /></g:link></li>
+            <sec:ifAnyGranted roles="${grailsApplication.config.irb.roles.names.reviewer}">
+              <li><g:link controller="application" action="assignedToMe"><g:message code="application.assigned.to.me.label" /></g:link></li>
+            </sec:ifAnyGranted>
+            <sec:ifAnyGranted roles="${grailsApplication.config.irb.roles.names.chair},ROLE_ADMIN">
+              <li><g:link controller="application" action="pending"><g:message code="application.pending.label" /></g:link></li>
+              <li><g:link controller="application" action="underReview"><g:message code="application.under.review.label" /></g:link></li>
+              <li><g:link controller="application" action="completed"><g:message code="application.completed.label" /></g:link></li>
+            </sec:ifAnyGranted>
+          </ul>
+        </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <sec:ifAllGranted roles="ROLE_ADMIN">
-        <li class="dropdown">
+        <li class="dropdown<g:if test="${params.action == 'manage'}"> active</g:if>">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Site Administration <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><g:link controller="user" action="manage"><g:message code="user.management.label" /></g:link></li>
@@ -26,7 +39,7 @@
         </li>
         </sec:ifAllGranted>
         <sec:ifLoggedIn>
-          <li class="dropdown">
+          <li class="dropdown<g:if test="${params.controller == 'user' && params.action == 'profile'}"> active</g:if>">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><irb:welcomeMessage/> <b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li><g:link controller="user" action="profile">Update Profile</g:link></li>
