@@ -11,12 +11,12 @@
     <div class="col-md-10 col-sm-12">
       <h1><g:message code="application.label" /></h1>
       <g:render template="../shared/alerts" />
-      <h3>Application List</h3>
+      <h3>Your Applications</h3>
       <g:if test="${applicationInstanceList.size() > 0}">
         <g:each in="${applicationInstanceList}" var="applicationInstance">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title">${applicationInstance?.title}</h3>
+              <h3 class="panel-title"><g:link action="show" id="${applicationInstance?.id}">${applicationInstance?.title}</g:link></h3>
             </div>
             <div class="panel-body">
               Description: ${applicationInstance?.description ?: "None"}<br>

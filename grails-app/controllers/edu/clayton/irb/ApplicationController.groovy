@@ -1,10 +1,7 @@
 package edu.clayton.irb
 
-import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
 import grails.transaction.Transactional
-
-import java.io.File
 
 @Secured('IS_AUTHENTICATED_FULLY')
 @Transactional
@@ -39,6 +36,17 @@ class ApplicationController {
     flash.error = message(code: 'application.submit.error')
     log.error("An error occurred submitting the application:\n${applicationInstance.errors}")
     render(view: 'submit', model: [applicationInstance: applicationInstance])
+  }
+
+  def show(Application applicationInstance) {
+    def currentUser = springSecurityService.currentUser
+    if (applicationInstance && applicationInstance.user == currentUser) {
+      def applicationFileList = applicationInstance?.files?.sort { it.filename }
+      return [applicationInstance: applicationInstance, applicationFileList: applicationFileList]
+    }
+
+    flash.error = message(code: 'application.not.found.error', args: [params?.id])
+    redirect(action: 'index')
   }
 
 }
