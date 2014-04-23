@@ -24,4 +24,6 @@ databaseChangeLog = {
 	include file: '201404221153-add-filename-hash-to-application-file.groovy'
 
 	include file: '201404231145-add-original-filename-to-application-file.groovy'
+
+	include file: '201404231258-add-assigned-to-field-to-application.groovy'
 }

@@ -8,14 +8,16 @@ class Application {
   String title
   String description
   String comments
-  User user
+  User assignedTo
   User reviewedBy
+  User user
 
   static belongsTo = [User]
 
   static hasMany = [files: ApplicationFile]
 
   static constraints = {
+    assignedTo nullable: true
     comments nullable: true
     description nullable: true
     reviewedBy nullable: true
