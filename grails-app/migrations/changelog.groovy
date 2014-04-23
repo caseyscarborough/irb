@@ -22,4 +22,6 @@ databaseChangeLog = {
 	include file: '201404212143-add-size-to-file.groovy'
 
 	include file: '201404221153-add-filename-hash-to-application-file.groovy'
+
+	include file: '201404231145-add-original-filename-to-application-file.groovy'
 }

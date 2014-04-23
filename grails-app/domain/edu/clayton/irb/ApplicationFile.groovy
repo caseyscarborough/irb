@@ -6,6 +6,7 @@ class ApplicationFile {
   Integer size
   String location
   String filename
+  String originalFilename
   String hash
   User user
 
@@ -37,6 +38,21 @@ class ApplicationFile {
 
   String getDeleteUrl() {
     grailsLinkGenerator.link(controller: 'file', action: 'delete', id: this?.id)
+  }
+
+  String getSizeString() {
+    if (sizeInMegabytes > 1) {
+      return "${sizeInMegabytes}MB"
+    }
+    return "${sizeInKilobytes}KB"
+  }
+
+  Double getSizeInKilobytes() {
+    return Math.round(this?.size / 100) / 10
+  }
+
+  Double getSizeInMegabytes() {
+    return Math.round(this?.size / 100000) / 10
   }
 
   String toString() {
