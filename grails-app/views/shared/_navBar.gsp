@@ -40,7 +40,7 @@
         </sec:ifAllGranted>
         <sec:ifLoggedIn>
           <li class="dropdown<g:if test="${params.controller == 'user' && params.action == 'profile'}"> active</g:if>">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><irb:welcomeMessage/> <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><irb:welcomeMessage /> <b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li><g:link controller="user" action="profile">Update Profile</g:link></li>
             </ul>

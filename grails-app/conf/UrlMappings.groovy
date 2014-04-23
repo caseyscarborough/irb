@@ -10,7 +10,7 @@ class UrlMappings {
     "/applications/completed"(controller: "application", action: "completed")
     "/applications/pending"(controller: "application", action: "pending")
     "/applications/under-review"(controller: "application", action: "underReview")
-    "/applications/assigned-to-me"(controller: "application", action: "assignedToMe")
+    "/applications/assigned"(controller: "application", action: "assignedToMe")
     "/applications"(controller: "application", action: "index")
     "/user/profile/$username"(controller: "user", action: "profile")
     "/file/download/$fileHash"(controller: "file", action: "download")
