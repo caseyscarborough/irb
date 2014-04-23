@@ -2,6 +2,11 @@
 <head>
   <meta name='layout' content='main'/>
   <title><g:message code="user.management.label" /></title>
+  <script>
+    $(function() {
+      $('.tooltip-link').tooltip({ placement: 'right', container: 'body' });
+    })
+  </script>
 </head>
 
 <body>
@@ -26,19 +31,19 @@
         <tbody>
         <g:each in="${userInstanceList}" var="userInstance">
           <tr<g:if test="${!userInstance?.enabled}"> class="warning"</g:if>>
-            <td><g:link action="profile" params="${[username: userInstance?.username]}">${userInstance?.username}</g:link></td>
+            <td><g:link action="profile" params="${[username: userInstance?.username]}" title="View Profile" class="tooltip-link">${userInstance?.username}</g:link></td>
             <td>${userInstance}</td>
-            <td><a href="mailto:${userInstance?.email}">${userInstance?.email}</a></td>
+            <td><a href="mailto:${userInstance?.email}" title="Email ${userInstance}" class="tooltip-link">${userInstance?.email}</a></td>
             <td>${userInstance?.authoritiesString}</td>
             <td>${userInstance?.enabled ? "Yes" : "No"}</td>
             <td>
               <g:if test="${userInstance != currentUser}">
                 <g:if test="${userInstance?.enabled}">
-                  <g:link action="disable" id="${userInstance?.id}" onclick="return confirm('Are you sure?')">Disable</g:link>
+                  <g:link action="disable" id="${userInstance?.id}" onclick="return confirm('Are you sure?')" class="tooltip-link" title="Disable"><i class="glyphicon glyphicon-ban-circle"></i></g:link>
                 </g:if><g:else>
-                <g:link action="enable" id="${userInstance?.id}" onclick="return confirm('Are you sure?')">Enable</g:link>
+                <g:link action="enable" id="${userInstance?.id}" onclick="return confirm('Are you sure?')" class="tooltip-link" title="Enable"><i class="glyphicon glyphicon-ok"></i></g:link>
               </g:else>
-                &middot; <g:link action="delete" id="${userInstance?.id}" onclick="return confirm('Are you sure you would like to permanently delete this user and all information associated with them?')">Delete</g:link>
+                &nbsp;<g:link action="delete" id="${userInstance?.id}" onclick="return confirm('Are you sure you would like to permanently delete this user and all information associated with them?')" class="tooltip-link" title="Delete"><i class="glyphicon glyphicon-trash"></i></g:link>
               </g:if>
             </td>
           </tr>

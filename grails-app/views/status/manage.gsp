@@ -2,6 +2,11 @@
 <head>
   <meta name='layout' content='main'/>
   <title><g:message code="status.management.label" /></title>
+  <script>
+    $(function() {
+      $('.tooltip-link').tooltip({ placement: 'right', container: 'body' });
+    })
+  </script>
 </head>
 
 <body>
@@ -20,8 +25,8 @@
             </div>
             <div class="panel-body">
               <p>${statusInstance?.description}</p>
-              <g:link action="edit" params="${[id: statusInstance?.id]}">Edit</g:link> &middot;
-              <g:link action="delete" params="${[id: statusInstance?.id]}" onclick="return confirm('Are you sure?')">Delete</g:link>
+              <g:link action="edit" params="${[id: statusInstance?.id]}"class="tooltip-link" title="Edit"><i class="glyphicon glyphicon-pencil"></i></g:link>&nbsp;
+              <g:link action="delete" params="${[id: statusInstance?.id]}" onclick="return confirm('Are you sure?')" class="tooltip-link" title="Delete"><i class="glyphicon glyphicon-trash"></i></g:link>
             </div>
           </div>
         </g:each>
