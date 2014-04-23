@@ -145,4 +145,15 @@ irb {
   supportedFiletypes = [ 'PDF', 'JPG', 'PNG', 'GIF', 'DOCX', 'DOC', 'XLS', 'XLSX', 'JPEG' ]
   maxFileSize = 100000000 // 100MB
   uploadLocation = "/Users/Casey/Desktop"
+
+  roles {
+    names {
+      reviewer = "ROLE_IRB_REVIEWER"
+      chair    = "ROLE_IRB_CHAIR"
+    }
+    descriptions {
+      reviewer = "IRB Reviewer"
+      chair    = "IRB Chair"
+    }
+  }
 }
