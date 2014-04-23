@@ -26,7 +26,7 @@
         </div>
         <div class="form-group">
           <label for="email"><g:message code="user.email.label" /></label>
-          <input type="text" id="email" class="form-control" name="email" value="${userInstance?.email}" placeholder="${message(code: 'user.email.label')}" required />
+          <input type="text" id="email" class="form-control" name="email" value="${userInstance?.email}" placeholder="${message(code: 'user.email.label')}" required pattern=".*@.*\..*" />
         </div>
         <div class="form-group">
           <label for="password"><g:message code="user.password.label" /></label>

@@ -2,6 +2,11 @@
 <head>
   <meta name='layout' content='main'/>
   <title>Profile</title>
+  <script>
+    $(function() {
+      $('.tooltip-link').tooltip({ placement: 'right', container: 'body' });
+    })
+  </script>
 </head>
 
 <body>
@@ -26,7 +31,7 @@
           <input type="text" id="email" class="form-control" name="email" value="${userInstance?.email}" placeholder="${message(code: 'user.email.label')}" required pattern=".*@.*\..*" />
         </div>
         <div class="form-group">
-          <label for="currentPassword"><g:message code="user.current.password.label" /> (Required)</label>
+          <label for="currentPassword"><g:message code="user.current.password.label" /> (Required) <a class="tooltip-link" title="The currently logged in user's password">?</a></a></label>
           <input type="password" id="currentPassword" class="form-control" name="currentPassword" value="" placeholder="${message(code: 'user.current.password.label')}" required />
         </div>
         <div class="form-group">
@@ -39,14 +44,12 @@
         </div>
         <sec:ifAllGranted roles="ROLE_ADMIN">
           <irb:isNotUser username="${userInstance?.username}">
-            <div class="form-group">
-              <label for="role"><g:message code="user.role.label" /></label>
-              <select id="role" name="role" class="form-control">
-                <g:each in="${roleInstanceList}" var="roleInstance">
-                  <option value="${roleInstance?.id}"<g:if test="${userInstance?.role?.id == roleInstance?.id}"> selected</g:if>>${roleInstance}</option>
-                </g:each>
-              </select>
-            </div>
+            <g:each in="${roleInstanceList}" var="roleInstance">
+              <div class="checkbox">
+                <label for="role-${roleInstance?.id}">${roleInstance}</label>
+                <input type="checkbox" id="role-${roleInstance?.id}" name="role-${roleInstance?.id}" <g:if test="${userInstance?.hasRole(roleInstance)}"> checked</g:if>/>
+              </div>
+            </g:each>
           </irb:isNotUser>
         </sec:ifAllGranted>
         <g:submitButton id="submit" name="submit" class="btn btn-primary" value="${message(code: 'user.profile.submit.button')}" />

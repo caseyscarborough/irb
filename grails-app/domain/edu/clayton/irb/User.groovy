@@ -47,6 +47,10 @@ class User {
     return getAuthorities().contains(Role.findByAuthority(role))
   }
 
+  boolean hasRole(Role role) {
+    return getAuthorities().contains(role)
+  }
+
 	def beforeInsert() {
 		encodePassword()
 	}
