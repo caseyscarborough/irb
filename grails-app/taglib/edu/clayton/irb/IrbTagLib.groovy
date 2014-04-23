@@ -13,7 +13,7 @@ class IrbTagLib {
     if (springSecurityService.isLoggedIn()) {
       User userInstance = springSecurityService.getCurrentUser()
       if (userInstance?.firstName) {
-        out << "<img src='https://gravatar.com/avatar/${userInstance.email.encodeAsMD5()}/${attrs.size?:400}' alt='Gravatar for ${userInstance}' width='20' class='img img-circle'>&nbsp;&nbsp;"
+        out << "<img src='https://gravatar.com/avatar/${userInstance.email.encodeAsMD5()}/?s=100' alt='Gravatar for ${userInstance}' width='20' class='img img-circle'>&nbsp;&nbsp;"
         out << "Welcome, ${userInstance.firstName}!"
       } else {
         "Welcome!"
@@ -44,11 +44,12 @@ class IrbTagLib {
    *
    * @attr id REQUIRED the id of the user
    * @attr size the size in pixels of the gravatar
+   * @attr class the css class to use for the image
    */
   def gravatar = { attrs ->
     def userInstance = User.get(attrs.id)
     if (userInstance) {
-      out << "<img src='https://gravatar.com/avatar/${userInstance.email.encodeAsMD5()}/${attrs.size?:400}} alt='Gravatar for ${userInstance}'>"
+      out << "<img src='https://gravatar.com/avatar/${userInstance.email.encodeAsMD5()}/?s=${attrs.size?:400}} alt='Gravatar for ${userInstance}' class='${attrs.class}'>"
     }
   }
 }

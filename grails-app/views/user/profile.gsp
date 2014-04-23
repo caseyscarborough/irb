@@ -53,6 +53,8 @@
             </g:each>
           </irb:isNotUser>
         </sec:ifAllGranted>
+        <strong>Gravatar</strong><br>
+        <irb:gravatar id="${userInstance?.id}" size="125" class="img img-thumbnail" /><br><br>
         <g:submitButton id="submit" name="submit" class="btn btn-primary" value="${message(code: 'user.profile.submit.button')}" />
         <sec:ifAllGranted roles="ROLE_ADMIN">
           <br><br><g:link action="manage">Return to <g:message code="user.management.label" /></g:link>
