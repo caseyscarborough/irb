@@ -42,7 +42,7 @@ class ApplicationController {
     def currentUser = springSecurityService.currentUser
     if (applicationInstance && applicationInstance.user == currentUser) {
       def applicationFileList = applicationInstance?.files?.sort { it.filename }
-      return [applicationInstance: applicationInstance, applicationFileList: applicationFileList]
+      return [applicationInstance: applicationInstance, applicationFileList: applicationFileList, userInstance: applicationInstance?.user]
     }
 
     flash.error = message(code: 'application.not.found.error', args: [params?.id])

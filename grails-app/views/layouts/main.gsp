@@ -10,11 +10,11 @@
 		<title>IRB &middot; <g:layoutTitle /></title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <r:require modules="bootstrap" />
-		<g:layoutHead/>
     <g:javascript library="application" />
     <g:javascript library="jquery" />
     <r:layoutResources />
-    <script>
+    <g:layoutHead/>
+  <script>
       $(function() {
         var message = ${flash?.message?.size() > 0};
         var error = ${flash?.error?.size() > 0};
